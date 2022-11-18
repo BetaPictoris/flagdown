@@ -14,6 +14,10 @@ func main() {
 		AppName: "Flagdown",
 	})
 
+  // Serve client app
+  app.Static("/app", "./app")
+  app.Static("/static", "./app/static")
+
   v1api := app.Group("/api").Group("/v1")
 
   /*
