@@ -1,5 +1,12 @@
 all: dirs api app
 
+# Development
+start:
+	cd build; \
+	  ./flagdown
+
+dev: all start
+
 # Compile
 api:
 	cd src/api; \
