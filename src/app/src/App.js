@@ -1,24 +1,24 @@
 import React from 'react';
 import axios from 'axios';
 
+import './styles/App.scss'
+
 export default function App() {
-  const [data, setData] = React.useState('Waiting...');
+  const [connection, setConnection] = React.useState(false);
 
-  const handlePing = async () => {
-      try {
-          const response = await axios.get('/api/v1/ping');
-          setData(response.data);
-      } catch (e) {
-        setData('Failed to ping');
-      }
-
-      setTimeout(() => setData('Waiting...'), 2000);
-  }
+  React.useEffect(() => {
+    axios("/api/v1/ping")
+      .then(response => {
+        if (response.data) { setConnection(true) }
+      })
+  }, [])
 
   return (
-    <div className="App">
-      <div><pre>{data}</pre></div>
-      <button onClick={handlePing}>Ping</button>
+    <div className='App'>
+      <div className='Footer'>
+        Made with ❤ by <a href="//github.com/BetaPictoris">Beta Pictoris</a>.<br></br>
+        {connection ? "Connected to API" : "Not connected to API"}
+      </div>
     </div>
   );
 }
