@@ -10,6 +10,7 @@ import (
 
 const (
   API_SERVER_VERSION = "1.0.0"
+  API_VERSION = "v1"
 )
 
 func main() {
@@ -52,11 +53,40 @@ func main() {
 
   Checks if the API Server is running
   */
-  v1api.Get("/ping", func(c *fiber.Ctx) error {
-    c.SendStatus(200)
-    return c.SendString("Flagdown API Server v" + API_SERVER_VERSION + " using v1 API")
-  })
+  v1api.Get("/ping", handlePing)
 
   log.Println("Flagdown listening on :3000")
   app.Listen(":3000")
+}
+
+// Routes 
+
+/*
+  handlePing()
+  GET: /api/v1/ping
+
+  Checks if the API Server is running
+
+  HandlePing
+  Structure for handlePing response (pingResponse)
+
+  ServerVersion     string: The version of the API Server
+  APIVersion        string: The current stable API Version
+  APIInUseVersion   string: The API version used in the request
+*/
+func handlePing(c *fiber.Ctx) error {
+  pingResponse := HandlePing{
+    ServerVersion: API_SERVER_VERSION,
+    APIVersion: API_VERSION,
+    APIInUseVersion: "v1",
+  }
+
+  c.SendStatus(200)
+  return c.JSON(pingResponse)
+}
+
+type HandlePing struct {
+  ServerVersion   string
+  APIVersion      string
+  APIInUseVersion string
 }
