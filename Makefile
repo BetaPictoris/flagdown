@@ -5,7 +5,10 @@ start:
 	cd build; \
 	  ./flagdown
 
-dev: all start
+dev: all config start
+
+config:
+	cp examples/config.ini build/data
 
 # Compile
 api:
@@ -20,7 +23,8 @@ app:
 
 # File structure
 dirs:
-	mkdir -pv build
+	mkdir -v build
+	mkdir -v build/data
 
 clean:
 	rm -rfv build
