@@ -24,3 +24,9 @@ dirs:
 
 clean:
 	rm -rfv build
+
+cleanapi:
+	rm -v build/flagdown
+
+cleanapp:
+	rm -rv build/app
