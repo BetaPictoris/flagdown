@@ -5,7 +5,11 @@ import (
 
   "github.com/gofiber/fiber/v2"
   "github.com/gofiber/redirect/v2"
+
   "github.com/gofiber/fiber/v2/middleware/logger"
+  "github.com/gofiber/fiber/v2/middleware/monitor"
+  
+  "gopkg.in/ini.v1"
 )
 
 const (
@@ -14,6 +18,13 @@ const (
 )
 
 func main() {
+  log.Println("Opening config file...")
+  cfg, err := ini.Load("./data/config.ini")
+  apiConfig := cfg.Section("API")
+  if err != nil {
+      log.Fatalln(err)
+  }
+
   log.Println("Initializing API...")
   app := fiber.New(fiber.Config{
     ServerHeader:  "Flagdown API Server",
@@ -34,9 +45,12 @@ func main() {
     StatusCode: 301,
   }))
 
-  app.Use(logger.New(logger.Config{
-    Format: "[${ip}] ${status} - ${method} ${path}\n",
-  }))
+  if apiConfig.Key("logging").MustBool(false) {
+    log.Println("Setting logging config...")
+    app.Use(logger.New(logger.Config{
+      Format: "[${ip}] ${status} - ${method} ${path}\n",
+    }))
+  }
 
   /*
   GET: /app and /static
@@ -45,6 +59,16 @@ func main() {
   */
   app.Static("/app", "./app")
   app.Static("/static", "./app/static")
+
+  /*
+  GET: /metrics
+
+  Flagdown metrics page
+  */
+  if apiConfig.Key("metrics").MustBool(false) {
+    log.Println("Setting metrics config...")
+    app.Get("/metrics", monitor.New(monitor.Config{Title: "Flagdown metrics"}))
+  }
 
   v1api := app.Group("/api").Group("/v1")
 
