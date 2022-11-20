@@ -4,7 +4,7 @@ version: '3'
 services:
   adguardhome:
     image: ghcr.io/betapictoris/flagdown
-    container_name: adguardhome
+    container_name: Flagdown
     restart: unless-stopped
 
     ./data:/app/data
