@@ -1,0 +1,52 @@
+on:
+  release:
+    types: [published]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.19
+    
+    - name: Setup Node
+      uses: actions/setup-node@v3.4.1
+
+    - name: Setup build directory
+      run: mkdir -pv build/; mkdir -pv build/app/; mkdir -pv build/data/ 
+
+    - name: Install Node modules
+      run: cd ./src/app; npm install
+    
+    - name: Build client app
+      run: cd ./src/app; npm run build
+    
+    - name: Copy client app to build directory
+      run: cp -pv ./src/app/ ./build/app/
+
+    - name: Build Go API
+      run: cd ./src/api; go build;
+    
+    - name: Copy API to build directory
+      run: mv ./src/api/flagdown ./build/
+
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag betapictoris/flagdown:${{ github.event.release.tag_name }}
+    
+    - name: Login to Docker Hub
+      run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+
+    - name: Login to GitHub Container registry
+      run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u BetaPictoris --password-stdin
+    
+    - name: Push to Docker Hub
+      run: docker push betapictoris/flagdown:${{ github.event.release.tag_name }}
+    
+    - name: Push to GitHub Containers registry
+      run: docker push ghcr.io/betapictoris/flagdown:${{ github.event.release.tag_name }}
