@@ -1,0 +1,21 @@
+
+version: '3'
+
+services:
+  adguardhome:
+    image: betapictoris/flagdown
+    container_name: adguardhome
+    restart: unless-stopped
+
+    ./data:/app/data
+
+    ports:
+      - 3000:3000
+    labels:
+      - traefik.http.routers.flagdown.rule=Host(`flagdown.space.localhost`)
+      - traefik.http.routers.flagdown.service=flagdown
+      - traefik.http.services.flagdown.loadbalancer.server.port=3000
+      - flame.type=app
+      - flame.name=Flagdown
+      - flame.url=http://flagdown.space.localhost
+      - flame.icon=flag
