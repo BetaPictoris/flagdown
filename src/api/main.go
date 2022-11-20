@@ -203,6 +203,52 @@ func main() {
 		return c.SendString("Deleted project")
 	})
 
+	/*
+		POST: /api/v1/projects/:projectName/flags
+		Creates a new flag, params match that of Flag (struct)
+	*/
+	v1api.Post("/projects/:projectName/flags", func(c *fiber.Ctx) error {
+		flag := new(Flag)
+		if err := c.BodyParser(flag); err != nil {
+			c.SendStatus(400)
+			log.Println("Failed to parse flag data:", err)
+			return c.SendString("Failed to parse flag data")
+		}
+
+		// Get projectID from projectName
+		var projectID string
+		query, err := db.Query(`SELECT * FROM Projects WHERE projectName=?`, c.Params("projectName"))
+		if err != nil {
+			c.SendStatus(500)
+			log.Println("Failed to read projects:", err)
+			return c.SendString("Failed to read projects")
+		}
+
+		for query.Next() {
+			query.Scan(&projectID)
+		}
+
+		// Insert the new flag into the Flags table
+		queryFlags, err := db.Exec(`INSERT INTO Flags VALUES (NULL, ?, ?, ?)`, projectID)
+		if err != nil {
+			c.SendStatus(500)
+			log.Println("Failed to create new flag:", err)
+			return c.SendString("Failed to create new flag")
+		}
+
+		fID, _ := queryFlags.LastInsertId()
+		pID, _ := strconv.ParseInt(projectID, 10, 8)
+
+		c.SendStatus(200)
+		log.Println("Created flag in database:", fID)
+		return c.JSON(fiber.Map{
+			"FlagID":    fID,
+			"ProjectID": uint8(pID),
+			"FlagName":  flag.FlagName,
+			"FlagValue": flag.FlagName,
+		})
+	})
+
 	log.Println("Flagdown listening on :3000")
 	app.Listen(":3000")
 }
@@ -229,8 +275,23 @@ Structure that matches the "Projects" table
 ProjectID		 uint8: The project's ID.
 ProjectName		string: The name of the project.
 */
-
 type Project struct {
 	ProjectID   uint8
 	ProjectName string
+}
+
+/*
+Flag
+Structure that matches the "Flags" table
+
+FlagID			 uint8: The flag's ID.
+ProjectID		 uint8: The ID of the flag's project.
+FlagName		string: The name of the flag.
+Value 			string: The flag's value.
+*/
+type Flag struct {
+	FlagID    uint8
+	ProjectID uint8
+	FlagName  string
+	Value     string
 }
