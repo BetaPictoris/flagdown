@@ -225,7 +225,9 @@ func main() {
 		}
 
 		for query.Next() {
-			query.Scan(&projectID)
+			var projectName string
+			query.Scan(&projectID, &projectName)
+			log.Println(projectName, "has ID", projectID)
 		}
 
 		// Insert the new flag into the Flags table
@@ -249,6 +251,64 @@ func main() {
 		})
 	})
 
+	/*
+		GET: /api/v1/projects/:projectName/flags/:flagName?
+		Returns a list of flags for a given project, or a single flag with :flagName
+	*/
+	v1api.Get("/projects/:projectName/flags/:flagName?", func(c *fiber.Ctx) error {
+		var flags = []Flag{}
+
+		// Get projectID from projectName
+		var pIDs string
+		query, err := db.Query(`SELECT * FROM Projects WHERE projectName=?`, c.Params("projectName"))
+		if err != nil {
+			c.SendStatus(500)
+			log.Println("Failed to read projects:", err)
+			return c.SendString("Failed to read projects")
+		}
+
+		for query.Next() {
+			query.Scan(&pIDs)
+		}
+
+		var q = `SELECT * FROM Flags`
+		if c.Params("id") != "" {
+			q += ` WHERE projectID=` + pIDs
+		}
+
+		queryFlags, err := db.Query(q)
+		if err != nil {
+			c.SendStatus(500)
+			log.Println("Failed to read flags:", err)
+			return c.SendString("Failed to read flags")
+		}
+
+		for queryFlags.Next() {
+			var flagID, projectID, flagName, value string
+			query.Scan(&flagID, &projectID, &flagName, &value)
+
+			pID, err := strconv.ParseInt(projectID, 10, 8)
+			if err != nil {
+				c.SendStatus(500)
+				log.Println("Failed to parse projectID:", err)
+				return c.SendString("Failed to parse projectID")
+			}
+
+			fID, err := strconv.ParseInt(flagID, 10, 8)
+			if err != nil {
+				c.SendStatus(500)
+				log.Println("Failed to parse flagID:", err)
+				return c.SendString("Failed to parse flagID")
+			}
+
+			flags = append(flags, Flag{uint8(fID), uint8(pID), flagName, value})
+		}
+
+		c.SendStatus(200)
+		return c.JSON(flags)
+	})
+
+	// Start Flagdown server
 	host, _ := apiConfig.GetKey("host")
 	port, _ := apiConfig.GetKey("port")
 
