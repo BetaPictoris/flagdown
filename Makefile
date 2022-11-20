@@ -8,7 +8,7 @@ start:
 dev: all data start
 
 data:
-	cp examples/config.ini build/data
+	cp examples/config.ini build/data/
 
 # Compile
 api:
@@ -23,8 +23,8 @@ app:
 
 # File structure
 dirs:
-	mkdir -v build
-	mkdir -v build/data
+	mkdir -pv build
+	mkdir -pv build/data
 
 clean:
 	rm -rfv build
@@ -36,4 +36,4 @@ cleanapp:
 	rm -rv build/app
 
 cleandata:
-	rm -rfv build/
+	rm -rfv build/data
