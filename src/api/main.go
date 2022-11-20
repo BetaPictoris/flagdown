@@ -249,8 +249,11 @@ func main() {
 		})
 	})
 
-	log.Println("Flagdown listening on :3000")
-	app.Listen(":3000")
+	host, _ := apiConfig.GetKey("host")
+	port, _ := apiConfig.GetKey("port")
+
+	log.Println("Flagdown listening on http://" + host.Value() + ":" + port.Value())
+	app.Listen(host.Value() + ":" + port.Value())
 }
 
 /*
