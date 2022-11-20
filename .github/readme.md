@@ -54,7 +54,7 @@ cd ../..
 # Build Flagdown
 make
 # Copy the example configuration file
-make config
+make data
 ```
 
 To start Flagdown:
