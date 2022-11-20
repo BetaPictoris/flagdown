@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
 	"log"
+	"strconv"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/redirect/v2"
@@ -117,9 +118,6 @@ func main() {
 	})
 
 	/*
-		GET: /api/v1/projects/:ID?
-		Returns a list of projects, or a single project with the projectID ":ID"
-
 		POST: /api/v1/projects
 		Creates a new project, params match that of Project (struct)
 	*/
@@ -136,7 +134,7 @@ func main() {
 		query, err := db.Exec(`INSERT INTO Projects VALUES (NULL, ?)`, project.ProjectName)
 		if err != nil {
 			c.SendStatus(500)
-			log.Println("Failed to create new project", err)
+			log.Println("Failed to create new project:", err)
 			return c.SendString("Failed to create new project")
 		}
 
@@ -148,6 +146,43 @@ func main() {
 			"ProjectID":   pID,
 			"ProjectName": project.ProjectName,
 		})
+	})
+
+	/*
+		GET: /api/v1/projects/:ID?
+		Returns a list of projects, or a single project with the projectID ":ID"
+	*/
+	v1api.Get("/projects/:id?", func(c *fiber.Ctx) error {
+		var projects = []Project{}
+		var q = `SELECT * FROM Projects`
+
+		if c.Params("id") != "" {
+			q += ` WHERE projectID=` + c.Params("id")
+		}
+
+		query, err := db.Query(q)
+		if err != nil {
+			c.SendStatus(500)
+			log.Println("Failed to read projects:", err)
+			return c.SendString("Failed to read projects")
+		}
+
+		for query.Next() {
+			var projectID, projectName string
+			query.Scan(&projectID, &projectName)
+
+			pID, err := strconv.ParseInt(projectID, 10, 8)
+			if err != nil {
+				c.SendStatus(500)
+				log.Println("Failed to parse projectID:", err)
+				return c.SendString("Failed to parse projectID")
+			}
+
+			projects = append(projects, Project{uint8(pID), projectName})
+		}
+
+		c.SendStatus(200)
+		return c.JSON(projects)
 	})
 
 	log.Println("Flagdown listening on :3000")
