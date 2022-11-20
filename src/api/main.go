@@ -102,22 +102,59 @@ func main() {
 	v1api := app.Group("/api").Group("/v1")
 
 	/*
-	  GET: /api/v1/ping
-
-	  Checks if the API Server is running
+	   GET: /api/v1/ping
+	   Checks if the API Server is running
 	*/
-	v1api.Get("/ping", handlePing)
+	v1api.Get("/ping", func(c *fiber.Ctx) error {
+		pingResponse := HandlePing{
+			ServerVersion:   API_SERVER_VERSION,
+			APIVersion:      API_VERSION,
+			APIInUseVersion: "v1",
+		}
+
+		c.SendStatus(200)
+		return c.JSON(pingResponse)
+	})
+
+	/*
+		GET: /api/v1/projects/:ID?
+		Returns a list of projects, or a single project with the projectID ":ID"
+
+		POST: /api/v1/projects
+		Creates a new project, params match that of Project (struct)
+	*/
+	v1api.Post("/projects", func(c *fiber.Ctx) error {
+		// Creates "project" (of Project) and parses the request body to it
+		project := new(Project)
+		if err := c.BodyParser(project); err != nil {
+			c.SendStatus(400)
+			log.Println("Failed to parse project data:", err)
+			return c.SendString("Failed to parse project data")
+		}
+
+		// Now insert the new project into the Projects table
+		query, err := db.Exec(`INSERT INTO Projects VALUES (NULL, ?)`, project.ProjectName)
+		if err != nil {
+			c.SendStatus(500)
+			log.Println("Failed to create new project", err)
+			return c.SendString("Failed to create new project")
+		}
+
+		pID, _ := query.LastInsertId()
+
+		c.SendStatus(200)
+		log.Println("Stored project in database:", pID)
+		return c.JSON(fiber.Map{
+			"ProjectID":   pID,
+			"ProjectName": project.ProjectName,
+		})
+	})
 
 	log.Println("Flagdown listening on :3000")
 	app.Listen(":3000")
 }
 
-// Routes
-
 /*
-GET: /api/v1/ping
-Checks if the API Server is running
-
 HandlePing
 Structure for handlePing response (pingResponse)
 
@@ -125,16 +162,6 @@ ServerVersion     string: The version of the API Server
 APIVersion        string: The current stable API Version
 APIInUseVersion   string: The API version used in the request
 */
-func handlePing(c *fiber.Ctx) error {
-	pingResponse := HandlePing{
-		ServerVersion:   API_SERVER_VERSION,
-		APIVersion:      API_VERSION,
-		APIInUseVersion: "v1",
-	}
-
-	c.SendStatus(200)
-	return c.JSON(pingResponse)
-}
 
 type HandlePing struct {
 	ServerVersion   string
@@ -143,15 +170,14 @@ type HandlePing struct {
 }
 
 /*
-GET: /api/v1/projects/:ID?
-Returns a list of projects, or a single project with the projectID ":ID"
-
-POST: /api/v1/projects
-Creates a new project, params match that of Project (struct)
-
 Project
 Structure that matches the "Projects" table
 
 ProjectID		 uint8: The project's ID.
 ProjectName		string: The name of the project.
 */
+
+type Project struct {
+	ProjectID   uint8
+	ProjectName string
+}
