@@ -208,7 +208,7 @@ func main() {
 		Creates a new flag, params match that of Flag (struct)
 	*/
 	v1api.Post("/projects/:projectName/flags", func(c *fiber.Ctx) error {
-		flag := new(Flag)
+		flag := new(FlagNew)
 		if err := c.BodyParser(flag); err != nil {
 			c.SendStatus(400)
 			log.Println("Failed to parse flag data:", err)
@@ -229,7 +229,7 @@ func main() {
 		}
 
 		// Insert the new flag into the Flags table
-		queryFlags, err := db.Exec(`INSERT INTO Flags VALUES (NULL, ?, ?, ?)`, projectID)
+		queryFlags, err := db.Exec(`INSERT INTO Flags VALUES (NULL, ?, ?, ?)`, projectID, flag.FlagName, flag.Value)
 		if err != nil {
 			c.SendStatus(500)
 			log.Println("Failed to create new flag:", err)
@@ -245,7 +245,7 @@ func main() {
 			"FlagID":    fID,
 			"ProjectID": uint8(pID),
 			"FlagName":  flag.FlagName,
-			"FlagValue": flag.FlagName,
+			"FlagValue": flag.Value,
 		})
 	})
 
@@ -288,10 +288,18 @@ FlagID			 uint8: The flag's ID.
 ProjectID		 uint8: The ID of the flag's project.
 FlagName		string: The name of the flag.
 Value 			string: The flag's value.
+
+FlagNew
+Same as Flag, although without IDs
 */
 type Flag struct {
 	FlagID    uint8
 	ProjectID uint8
 	FlagName  string
 	Value     string
+}
+
+type FlagNew struct {
+	FlagName string
+	Value    string
 }
