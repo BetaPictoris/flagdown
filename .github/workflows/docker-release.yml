@@ -1,3 +1,5 @@
+name: Release Docker image
+
 on:
   release:
     types: [published]
