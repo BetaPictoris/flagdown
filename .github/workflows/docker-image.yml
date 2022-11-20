@@ -32,7 +32,7 @@ jobs:
       run: cd ./src/app; npm run build
     
     - name: Copy client app to build directory
-      run: cp -pv ./src/app/ ./build/app/
+      run: cp -rpv ./src/app/ ./build/app/
 
     - name: Build Go API
       run: cd ./src/api; go build;
