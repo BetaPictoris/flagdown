@@ -185,6 +185,24 @@ func main() {
 		return c.JSON(projects)
 	})
 
+	/*
+		DELETE: /api/v1/projects/:ID
+		Deletes a project
+	*/
+	v1api.Delete("/projects/:id", func(c *fiber.Ctx) error {
+		projectID := c.Params("id")
+
+		_, err := db.Exec(`DELETE FROM Projects WHERE projectID=?`, projectID)
+		if err != nil {
+			c.SendStatus(500)
+			log.Println("Failed to delete project:", err)
+			return c.SendString("Failed to delete project")
+		}
+
+		c.SendStatus(200)
+		return c.SendString("Deleted project")
+	})
+
 	log.Println("Flagdown listening on :3000")
 	app.Listen(":3000")
 }
