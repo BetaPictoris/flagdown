@@ -16,7 +16,7 @@ import (
 )
 
 const (
-	API_SERVER_VERSION = "1.0.0"
+	API_SERVER_VERSION = "0.0.1"
 	API_VERSION        = "v1"
 )
 
