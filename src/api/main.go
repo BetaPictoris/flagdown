@@ -205,7 +205,7 @@ func main() {
 
 	/*
 		POST: /api/v1/projects/:projectName/flags
-		Creates a new flag, params match that of Flag (struct)
+		Creates a new flag, params match that of FlagNew (struct)
 	*/
 	v1api.Post("/projects/:projectName/flags", func(c *fiber.Ctx) error {
 		flag := new(FlagNew)
