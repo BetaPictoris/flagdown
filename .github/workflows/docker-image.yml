@@ -13,6 +13,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.19
+    
+    - name: Setup Node
+      uses: actions/setup-node@v3.4.1
+
     - uses: actions/checkout@v3
+    - name: Setup build directory
+      run: mkdir -pv build/; mkdir -pv build/app/; mkdir -pv build/data/ 
+
+    - name: Install Node modules
+      run: cd ./src/app; npm install
+    
+    - name: Build client app
+      run: cd ./src/app; npm run build
+    
+    - name: Copy client app to build directory
+      run: cp -pv ./src/app/ ./build/app/
+
+    - name: Build Go API
+      run: cd ./src/api; go build;
+    
+    - name: Copy API to build directory
+      run: mv ./src/api/flagdown ./build/
+    
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag flagdown:$(git log | grep commit -m 1 | cut -f2 -d' ')
