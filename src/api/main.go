@@ -115,10 +115,8 @@ func main() {
 // Routes
 
 /*
-handlePing()
 GET: /api/v1/ping
-
-# Checks if the API Server is running
+Checks if the API Server is running
 
 HandlePing
 Structure for handlePing response (pingResponse)
@@ -143,3 +141,17 @@ type HandlePing struct {
 	APIVersion      string
 	APIInUseVersion string
 }
+
+/*
+GET: /api/v1/projects/:ID?
+Returns a list of projects, or a single project with the projectID ":ID"
+
+POST: /api/v1/projects
+Creates a new project, params match that of Project (struct)
+
+Project
+Structure that matches the "Projects" table
+
+ProjectID		 uint8: The project's ID.
+ProjectName		string: The name of the project.
+*/
