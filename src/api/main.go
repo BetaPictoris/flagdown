@@ -308,6 +308,25 @@ func main() {
 		return c.JSON(flags)
 	})
 
+	/*
+		DELETE: /api/v1/projects/:projectID/flags/:flagID
+		Deletes a flag (with :flagID) for a given project
+	*/
+	v1api.Delete("/projects/:projectID/flags/:flagID", func(c *fiber.Ctx) error {
+		projectID := c.Params("projectID")
+		flagID := c.Params("flagID")
+
+		_, err := db.Exec(`DELETE FROM Flags WHERE projectID=? AND flagID=?`, projectID, flagID)
+		if err != nil {
+			c.SendStatus(500)
+			log.Println("Failed to delete flag:", err)
+			return c.SendString("Failed to delete flag")
+		}
+
+		c.SendStatus(200)
+		return c.SendString("Deleted flag")
+	})
+
 	// Start Flagdown server
 	host, _ := apiConfig.GetKey("host")
 	port, _ := apiConfig.GetKey("port")
