@@ -5,9 +5,9 @@ start:
 	cd build; \
 	  ./flagdown
 
-dev: all config start
+dev: all data start
 
-config:
+data:
 	cp examples/config.ini build/data
 
 # Compile
@@ -34,3 +34,6 @@ cleanapi:
 
 cleanapp:
 	rm -rv build/app
+
+cleandata:
+	rm -rfv build/
