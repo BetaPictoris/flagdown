@@ -62,6 +62,11 @@ To start Flagdown:
 make start
 ```
 
+## :memo: Documentation
+
+For more documentation view the [wiki](https://github.com/BetaPictoris/flagdown/wiki).
+
+
 ---
 
 [![BetaPictoris](https://cdn.ozx.me/betapictoris/header.svg)](https://github.com/BetaPictoris)
