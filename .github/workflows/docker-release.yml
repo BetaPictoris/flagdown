@@ -39,7 +39,7 @@ jobs:
       run: mv ./src/api/flagdown ./build/
 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag betapictoris/flagdown:${{ github.event.release.tag_name }}
+      run: docker build . --file Dockerfile --tag ghcr.io/betapictoris/flagdown:${{ github.event.release.tag_name }}
 
     - name: Login to GitHub Container registry
       run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u BetaPictoris --password-stdin
