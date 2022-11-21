@@ -38,7 +38,7 @@ export default function DeleteProjectPrompt(props) {
   function onCreate() {
     setIsOpen(false)
     
-    if (projectName === props.projectName) {
+    if (projectName === project.ProjectName) {
       axios.delete(`/api/v1/projects/${project.ProjectID}`)
       toast({
         title: `${project.ProjectName} has been deleted.`,
