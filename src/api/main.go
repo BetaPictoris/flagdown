@@ -207,7 +207,7 @@ func main() {
 		POST: /api/v1/projects/:projectName/flags
 		Creates a new flag, params match that of FlagNew (struct)
 	*/
-	v1api.Post("/projects/:projectName/flags", func(c *fiber.Ctx) error {
+	v1api.Post("/projects/:projectID/flags", func(c *fiber.Ctx) error {
 		flag := new(FlagNew)
 		if err := c.BodyParser(flag); err != nil {
 			c.SendStatus(400)
@@ -216,13 +216,7 @@ func main() {
 		}
 
 		// Get projectID from projectName
-		var projectID string
-		query, err := db.Query(`SELECT * FROM Projects WHERE projectName=?`, c.Params("projectName"))
-		if err != nil {
-			c.SendStatus(500)
-			log.Println("Failed to read projects:", err)
-			return c.SendString("Failed to read projects")
-		}
+		var projectID = c.Params("projectID")
 
 		for query.Next() {
 			var projectName string
