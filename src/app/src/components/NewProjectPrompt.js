@@ -15,6 +15,9 @@ export default function NewProjectPrompt() {
   const [ isOpen, setIsOpen ] = React.useState(false)
   const cancelRef = React.useRef()
   const toast = useToast()
+
+  const [projectName, setProjectName] = React.useState('')
+  const handleProjectNameChange = (event) => setProjectName(event.target.value)
   
   function onClose() {
     setIsOpen(false)
@@ -26,7 +29,6 @@ export default function NewProjectPrompt() {
 
   function onCreate() {
     setIsOpen(false)
-    const projectName = document.getElementById('createNewProject').value;
     
     if (projectName === "") {
       toast({
@@ -67,6 +69,8 @@ export default function NewProjectPrompt() {
   
             <AlertDialogBody>
               <Input
+                value={projectName}
+                onChange={handleProjectNameChange}
                 id='createNewProject'
                 placeholder='Project name'
               />
