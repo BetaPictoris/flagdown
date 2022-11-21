@@ -5,15 +5,10 @@ A self-hosted Go-based feature flag system
 ## :rocket: Features
  - A minimal React dashboard (coming soon).
  - A simple API and Server written in Go.
-
-## :hammer: Installation
-
-View the instructions in the [wiki](https://github.com/BetaPictoris/flagdown/wiki/Installation).
-
+ 
 ## :memo: Documentation
 
-For more documentation view the [wiki](https://github.com/BetaPictoris/flagdown/wiki).
-
+For documentation on the API, installation, and more view the [wiki](https://github.com/BetaPictoris/flagdown/wiki).
 
 ---
 
