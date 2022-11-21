@@ -8,8 +8,18 @@ import DeleteProjectPrompt from './components/DeleteProjectPrompt'
 export default function App() {
   return (
     <div className='App'>
-      <NewProjectPrompt />
-      <DeleteProjectPrompt projectID="1" />
+      <div className='Header'>
+        {/* TODO: Add a header */}
+      </div>
+      
+      <div className='AppCont'>
+        <NewProjectPrompt />
+        <DeleteProjectPrompt projectID="1" />
+      </div>
+
+      <div className='Footer'>
+        Made with ❤ by <a href="//github.com/BetaPictoris">Beta Pictoris</a>.
+      </div>
     </div>
   );
 }
