@@ -7,7 +7,7 @@ start:
 
 dev: all data start
 devapp: dirs app start
-devapp: dirs api data start
+devapi: dirs api data start
 
 data:
 	cp examples/config.ini build/data/
