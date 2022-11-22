@@ -6,6 +6,8 @@ start:
 	  ./flagdown
 
 dev: all data start
+devapp: dirs app start
+devapp: dirs api data start
 
 data:
 	cp examples/config.ini build/data/
