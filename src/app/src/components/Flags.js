@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import { Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel } from '@chakra-ui/react'
-import { Box } from '@chakra-ui/react'
+import { Divider, Box, Heading, Badge } from '@chakra-ui/react'
 
 import DeleteFlagPrompt from './DeleteFlagPrompt';
 
@@ -18,6 +18,11 @@ export default function Projects(props) {
 
   return (
     <div className='Projects'>
+      <Heading as='h2'>
+        Flags
+      </Heading>
+
+      <Divider />
       <Accordion>
         {flags.map(flags => 
           <AccordionItem
@@ -26,7 +31,7 @@ export default function Projects(props) {
                 <h2>
                   <AccordionButton>
                     <Box flex='1' textAlign='left'>
-                      {flags.FlagName}
+                      {flags.FlagName} <Badge>{flags.FlagID}</Badge>
                     </Box>
                     <AccordionIcon />
                   </AccordionButton>
