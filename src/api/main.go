@@ -204,6 +204,7 @@ func main() {
 	})
 
 	/*
+		POST: /api/v1/:projectID/flags
 		Creates a new flag, params match that of FlagNew (struct)
 	*/
 	v1api.Post("/projects/:projectID/flags", func(c *fiber.Ctx) error {
@@ -241,10 +242,11 @@ func main() {
 		Returns a list of flags for a given project, or a single flag with :flagName
 	*/
 	v1api.Get("/projects/:projectName/flags/:flagName?", func(c *fiber.Ctx) error {
+		// TODO: Fix optional flagName param
 		var flags = []Flag{}
 		var pIDs int
 		var projectName string
-		
+
 		// Find the project ID
 		rows, err := db.Query(`SELECT * FROM Projects WHERE projectName=?`, c.Params("projectName"))
 		if err != nil {
