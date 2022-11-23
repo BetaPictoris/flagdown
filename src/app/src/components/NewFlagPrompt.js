@@ -19,7 +19,6 @@ export default function NewFlagPrompt(props) {
   const [flagName, setFlagName] = React.useState('')
   const handleFlagNameChange = (event) => setFlagName(
     event.target.value
-      .toLowerCase()
       .replace(" ", "-")
   )
 
