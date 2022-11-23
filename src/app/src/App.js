@@ -16,7 +16,7 @@ export default function App() {
       <div className='AppCont'>
         <NewProjectPrompt />
         <DeleteProjectPrompt projectID="1" />
-        <Flags projectName="sample" />
+        <Flags projectID="1" />
       </div>
 
       <div className='Footer'>

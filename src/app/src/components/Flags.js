@@ -5,41 +5,52 @@ import { Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPane
 import { Divider, Box, Heading, Badge } from '@chakra-ui/react'
 
 import DeleteFlagPrompt from './DeleteFlagPrompt';
+import NewFlagPrompt from './NewFlagPrompt';
 
 export default function Projects(props) {
+  const [project, setProject] = React.useState({})
   const [flags, setFlags] = React.useState([])
 
   React.useEffect(() => {
-    axios(`/api/v1/projects/${props.projectName}/flags`)
+    axios(`/api/v1/projects/${props.projectID}`)
+      .then(response => {
+        if (response.data) { setProject(response.data[0]); }
+      })
+  }, [props.projectID])
+
+  React.useEffect(() => {
+    axios(`/api/v1/projects/${project.ProjectName}/flags`)
       .then(response => {
         if (response.data) { setFlags(response.data); }
       })
-  }, [props.projectName])
+  }, [project.ProjectName])
 
   return (
     <div className='Projects'>
       <Heading as='h2'>
         Flags
       </Heading>
+      <NewFlagPrompt projectID={project.ProjectID} />
 
       <Divider />
+      
       <Accordion>
-        {flags.map(flags => 
+        {flags.map(flag => 
           <AccordionItem
-            key={flags.FlagID}
+            key={flag.FlagID}
           >
                 <h2>
                   <AccordionButton>
                     <Box flex='1' textAlign='left'>
-                      {flags.FlagName} <Badge>{flags.FlagID}</Badge>
+                      {flag.FlagName} <Badge>{flag.FlagID}</Badge>
                     </Box>
                     <AccordionIcon />
                   </AccordionButton>
                 </h2>
                 <AccordionPanel pb={4}>
                   <DeleteFlagPrompt 
-                    projectName={props.projectName}
-                    flagName={flags.flagName}
+                    projectName={project.ProjectName}
+                    flagName={flag.flagName}
                   />
                 </AccordionPanel>
           </AccordionItem>
