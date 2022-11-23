@@ -25,7 +25,7 @@ export default function DeleteProjectPrompt(props) {
       .then(response => {
         if (response.data) { setProject(response.data[0]) }
       })
-  }, [])
+  }, [props.projectID])
 
   function onClose() {
     setIsOpen(false)
@@ -49,7 +49,7 @@ export default function DeleteProjectPrompt(props) {
     } else {
       toast({
         title: 'Failed to delete project.',
-        description: "The project names don\'t match.",
+        description: "The project names don't match.",
         status: 'error',
         duration: 2000,
         isClosable: true,
