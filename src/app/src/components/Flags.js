@@ -4,15 +4,17 @@ import axios from 'axios';
 import { Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel } from '@chakra-ui/react'
 import { Box } from '@chakra-ui/react'
 
+import DeleteFlagPrompt from './DeleteFlagPrompt';
+
 export default function Projects(props) {
   const [flags, setFlags] = React.useState([])
 
   React.useEffect(() => {
     axios(`/api/v1/projects/${props.projectName}/flags`)
       .then(response => {
-        if (response.data) { setFlags(response.data); alert(response.data) }
+        if (response.data) { setFlags(response.data); }
       })
-  }, [])
+  }, [props.projectName])
 
   return (
     <div className='Projects'>
@@ -30,10 +32,10 @@ export default function Projects(props) {
                   </AccordionButton>
                 </h2>
                 <AccordionPanel pb={4}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                  veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                  commodo consequat.
+                  <DeleteFlagPrompt 
+                    projectName={props.projectName}
+                    flagName={flags.flagName}
+                  />
                 </AccordionPanel>
           </AccordionItem>
         )}
