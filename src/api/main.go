@@ -88,7 +88,6 @@ func main() {
 	  Serve client app
 	*/
 	app.Static("/app", "./app")
-	app.Static("/static", "./app/static")
 
 	/*
 	  GET: /metrics
