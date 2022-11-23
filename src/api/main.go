@@ -237,6 +237,58 @@ func main() {
 	})
 
 	/*
+		PATCH: /api/v1/projects/:projectID/flags/:flagID
+		Changes part of a flag's data.
+	*/
+	v1api.Patch("/projects/:projectID/flags/:flagID", func(c *fiber.Ctx) error {
+		var flag = new(FlagNew)
+
+		if err := c.BodyParser(flag); err != nil {
+			c.SendStatus(400)
+			log.Println("Failed to parse flag data:", err)
+			return c.SendString("Failed to parse flag data")
+		}
+
+		if flag.FlagName != "" {
+			_, err = db.Exec(`UPDATE Flags SET flagName=? WHERE flagID=?`, flag.FlagName, c.Params("flagID"))
+			if err != nil {
+				c.SendStatus(500)
+				log.Println("Failed to update flag name:", err)
+				return c.SendString("Failed to update flag name")
+			}
+		}
+
+		if flag.Value != "" {
+			_, err = db.Exec(`UPDATE Flags set value=? WHERE flagID=?`, flag.Value, c.Params("flagID"))
+			if err != nil {
+				c.SendStatus(500)
+				log.Println("Failed to update flag value:", err)
+				return c.SendString("Failed to update flag value")
+			}
+		}
+
+		var flagRes Flag
+
+		flagRows, err := db.Query(`SELECT * FROM Flags WHERE flagID=?`, c.Params("flagID"))
+		if err != nil {
+			c.SendStatus(500)
+			log.Println("Failed to read flags:", err)
+			return c.SendString("Failed to read flags")
+		}
+
+		for flagRows.Next() {
+			var flagID, projectID int
+			var flagName, value string
+			flagRows.Scan(&flagID, &projectID, &flagName, &value)
+
+			flagRes = Flag{uint8(flagID), uint8(projectID), flagName, value}
+		}
+
+		c.SendStatus(200)
+		return c.JSON(flagRes)
+	})
+
+	/*
 		GET: /api/v1/projects/:projectName/flags/:flagName?
 		Returns a list of flags for a given project, or a single flag with :flagName
 	*/
