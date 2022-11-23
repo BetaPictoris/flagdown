@@ -17,7 +17,11 @@ export default function NewProjectPrompt() {
   const toast = useToast()
 
   const [projectName, setProjectName] = React.useState('')
-  const handleProjectNameChange = (event) => setProjectName(event.target.value)
+  const handleProjectNameChange = (event) => setProjectName(
+    event.target.value
+      .toLowerCase()
+      .replace(" ", "-")
+  )
   
   function onClose() {
     setIsOpen(false)

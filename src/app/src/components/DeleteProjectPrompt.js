@@ -35,7 +35,7 @@ export default function DeleteProjectPrompt(props) {
     setIsOpen(true)
   }
 
-  function onCreate() {
+  function onDelete() {
     setIsOpen(false)
     
     if (projectName === project.ProjectName) {
@@ -88,7 +88,7 @@ export default function DeleteProjectPrompt(props) {
               <Button ref={cancelRef} onClick={onClose}>
                 Cancel
               </Button>
-              <Button colorScheme='red' onClick={onCreate} ml={3}>
+              <Button colorScheme='red' onClick={onDelete} ml={3}>
                 Delete
               </Button>
             </AlertDialogFooter>
