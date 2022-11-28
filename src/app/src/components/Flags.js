@@ -34,9 +34,9 @@ export default function Projects(props) {
 
       <Divider />
       
-      <Accordion>
+      <Accordion allowToggle>
         {flags.map(flag => 
-          <Flag flag={flag} project={project} />
+          <Flag key={flag.FlagID} flag={flag} project={project} />
         )}
       </Accordion>
     </div>
