@@ -1,11 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 
-import { Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel } from '@chakra-ui/react'
-import { Divider, Box, Heading, Badge } from '@chakra-ui/react'
+import { Accordion } from '@chakra-ui/react'
+import { Divider, Heading } from '@chakra-ui/react'
 
-import DeleteFlagPrompt from './DeleteFlagPrompt';
 import NewFlagPrompt from './NewFlagPrompt';
+import Flag from './Flag';
 
 export default function Projects(props) {
   const [project, setProject] = React.useState({})
@@ -36,24 +36,7 @@ export default function Projects(props) {
       
       <Accordion>
         {flags.map(flag => 
-          <AccordionItem
-            key={flag.FlagID}
-          >
-                <h2>
-                  <AccordionButton>
-                    <Box flex='1' textAlign='left'>
-                      {flag.FlagName} <Badge>{flag.FlagID}</Badge>
-                    </Box>
-                    <AccordionIcon />
-                  </AccordionButton>
-                </h2>
-                <AccordionPanel pb={4}>
-                  <DeleteFlagPrompt 
-                    projectName={project.ProjectName}
-                    flagName={flag.flagName}
-                  />
-                </AccordionPanel>
-          </AccordionItem>
+          <Flag flag={flag} project={project} />
         )}
       </Accordion>
     </div>
