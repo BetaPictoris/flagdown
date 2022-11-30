@@ -75,14 +75,14 @@ export default function NewFlagPrompt(props) {
             </AlertDialogHeader>
 
             <AlertDialogBody>
-              <label for="createNewFlagName">Flag name:</label>
+              <label htmlFor="createNewFlagName">Flag name:</label>
               <Input
                 value={flagName}
                 onChange={handleFlagNameChange}
                 id="createNewFlagName"
                 placeholder="Flag name"
               />
-              <label for="createNewFlagValue">Flag value:</label>
+              <label htmlFor="createNewFlagValue">Flag value:</label>
               <Input
                 value={flagValue}
                 onChange={handleFlagValueChange}
