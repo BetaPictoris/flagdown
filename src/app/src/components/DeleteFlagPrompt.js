@@ -8,8 +8,9 @@ import {
   AlertDialogHeader,
   AlertDialogContent,
   AlertDialogOverlay,
+  Button,
+  useToast
 } from '@chakra-ui/react'
-import { Button, useToast } from '@chakra-ui/react'
 
 export default function DeleteFlagPrompt(props) {
   const [ flag, setFlag] = React.useState({})

@@ -1,8 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-import { Accordion } from '@chakra-ui/react'
-import { Divider, Heading } from '@chakra-ui/react'
+import { Accordion, Divider, Heading } from '@chakra-ui/react'
 
 import NewFlagPrompt from './NewFlagPrompt';
 import Flag from './Flag';

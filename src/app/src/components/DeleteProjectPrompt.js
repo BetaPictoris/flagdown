@@ -8,8 +8,10 @@ import {
   AlertDialogHeader,
   AlertDialogContent,
   AlertDialogOverlay,
+  Input, 
+  Button,
+  useToast
 } from '@chakra-ui/react'
-import { Input, Button, useToast } from '@chakra-ui/react'
 
 export default function DeleteProjectPrompt(props) {
   const [project, setProject] = React.useState({})

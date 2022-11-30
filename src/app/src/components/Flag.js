@@ -1,5 +1,11 @@
-import { AccordionItem, AccordionButton, AccordionIcon, AccordionPanel } from '@chakra-ui/react'
-import { Box, Badge } from '@chakra-ui/react'
+import {
+  AccordionItem,
+  AccordionButton,
+  AccordionIcon,
+  AccordionPanel,
+  Box,
+  Badge
+} from '@chakra-ui/react'
 
 import DeleteFlagPrompt from './DeleteFlagPrompt';
 
