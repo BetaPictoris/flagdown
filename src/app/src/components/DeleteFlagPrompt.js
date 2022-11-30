@@ -13,41 +13,44 @@ import {
 } from '@chakra-ui/react'
 
 export default function DeleteFlagPrompt(props) {
-  const [ flag, setFlag] = React.useState({})
-  const [ isOpen, setIsOpen ] = React.useState(false)
-  const cancelRef = React.useRef()
-  const toast = useToast()
+  const [flag, setFlag] = React.useState({});
+  const [isOpen, setIsOpen] = React.useState(false);
+  const cancelRef = React.useRef();
+  const toast = useToast();
 
   React.useEffect(() => {
-    axios(`/api/v1/projects/${props.projectName}/flags/${props.flagName}`)
-      .then(response => {
-        if (response.data) { setFlag(response.data[0]) }
-      })
-  }, [props.projectName, props.flagName])
+    axios(`/api/v1/projects/${props.projectName}/flags/${props.flagName}`).then(
+      (response) => {
+        if (response.data) {
+          setFlag(response.data[0]);
+        }
+      }
+    );
+  }, [props.projectName, props.flagName]);
 
   function onClose() {
-    setIsOpen(false)
+    setIsOpen(false);
   }
 
   function onOpen() {
-    setIsOpen(true)
+    setIsOpen(true);
   }
 
   function onDelete() {
-    onClose()
+    onClose();
 
-    axios.delete(`/api/v1/projects/${flag.ProjectID}/flags/${flag.FlagID}`)
+    axios.delete(`/api/v1/projects/${flag.ProjectID}/flags/${flag.FlagID}`);
     toast({
       title: `${flag.FlagName} has been deleted.`,
       status: `success`,
       duration: 2000,
       isClosable: true,
-    })
+    });
   }
 
-  return(
+  return (
     <>
-      <Button colorScheme='red' onClick={onOpen}>
+      <Button colorScheme="red" onClick={onOpen}>
         Delete {flag.FlagName}
       </Button>
 
@@ -58,9 +61,7 @@ export default function DeleteFlagPrompt(props) {
       >
         <AlertDialogOverlay>
           <AlertDialogContent>
-            <AlertDialogHeader>
-              Delete flag
-            </AlertDialogHeader>
+            <AlertDialogHeader>Delete flag</AlertDialogHeader>
 
             <AlertDialogBody>
               This will delete "{flag.FlagName}" and can not be undone.
@@ -70,7 +71,7 @@ export default function DeleteFlagPrompt(props) {
               <Button ref={cancelRef} onClick={onClose}>
                 Cancel
               </Button>
-              <Button colorScheme='red' onClick={onDelete} ml={3}>
+              <Button colorScheme="red" onClick={onDelete} ml={3}>
                 Delete
               </Button>
             </AlertDialogFooter>
@@ -78,5 +79,5 @@ export default function DeleteFlagPrompt(props) {
         </AlertDialogOverlay>
       </AlertDialog>
     </>
-  )
+  );
 }

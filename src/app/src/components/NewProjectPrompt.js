@@ -1,5 +1,5 @@
-import React from 'react';
-import axios from 'axios';
+import React from "react";
+import axios from "axios";
 
 import {
   AlertDialog,
@@ -14,51 +14,48 @@ import {
 } from '@chakra-ui/react'
 
 export default function NewProjectPrompt() {
-  const [ isOpen, setIsOpen ] = React.useState(false)
-  const cancelRef = React.useRef()
-  const toast = useToast()
+  const [isOpen, setIsOpen] = React.useState(false);
+  const cancelRef = React.useRef();
+  const toast = useToast();
 
-  const [projectName, setProjectName] = React.useState('')
-  const handleProjectNameChange = (event) => setProjectName(
-    event.target.value
-      .toLowerCase()
-      .replace(" ", "-")
-  )
-  
+  const [projectName, setProjectName] = React.useState("");
+  const handleProjectNameChange = (event) =>
+    setProjectName(event.target.value.toLowerCase().replace(" ", "-"));
+
   function onClose() {
-    setIsOpen(false)
+    setIsOpen(false);
   }
 
   function onOpen() {
-    setIsOpen(true)
+    setIsOpen(true);
   }
 
   function onCreate() {
-    setIsOpen(false)
-    
+    setIsOpen(false);
+
     if (projectName === "") {
       toast({
-        title: 'Project name can\'t be empty',
+        title: "Project name can't be empty",
         description: "You must enter a project name.",
-        status: 'error',
+        status: "error",
         duration: 2000,
         isClosable: true,
-      })
+      });
     } else {
-      axios.post("/api/v1/projects", {ProjectName: projectName})
+      axios.post("/api/v1/projects", { ProjectName: projectName });
       toast({
-        title: 'Project created!',
+        title: "Project created!",
         description: "The project has been created.",
-        status: 'success',
+        status: "success",
         duration: 2000,
         isClosable: true,
-      })
+      });
     }
   }
 
   return (
     <>
-      <Button colorScheme='green' onClick={onOpen}>
+      <Button colorScheme="green" onClick={onOpen}>
         Create new project
       </Button>
 
@@ -69,16 +66,16 @@ export default function NewProjectPrompt() {
       >
         <AlertDialogOverlay>
           <AlertDialogContent>
-            <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+            <AlertDialogHeader fontSize="lg" fontWeight="bold">
               Create new project
             </AlertDialogHeader>
-  
+
             <AlertDialogBody>
               <Input
                 value={projectName}
                 onChange={handleProjectNameChange}
-                id='createNewProject'
-                placeholder='Project name'
+                id="createNewProject"
+                placeholder="Project name"
               />
             </AlertDialogBody>
 
@@ -86,7 +83,7 @@ export default function NewProjectPrompt() {
               <Button ref={cancelRef} onClick={onClose}>
                 Cancel
               </Button>
-              <Button colorScheme='green' onClick={onCreate} ml={3}>
+              <Button colorScheme="green" onClick={onCreate} ml={3}>
                 Create
               </Button>
             </AlertDialogFooter>
@@ -94,5 +91,5 @@ export default function NewProjectPrompt() {
         </AlertDialogOverlay>
       </AlertDialog>
     </>
-  )
+  );
 }

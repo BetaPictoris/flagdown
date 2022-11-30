@@ -1,11 +1,12 @@
 # Flagdown [![Docker Image](https://github.com/BetaPictoris/flagdown/actions/workflows/docker-image.yml/badge.svg)](https://github.com/BetaPictoris/flagdown/actions/workflows/docker-image.yml)
 
-A self-hosted Go-based feature flag system 
+A self-hosted Go-based feature flag system
 
 ## :rocket: Features
- - A minimal React dashboard (coming soon).
- - A simple API and Server written in Go.
- 
+
+- A minimal React dashboard (coming soon).
+- A simple API and Server written in Go.
+
 ## :memo: Documentation
 
 For documentation on the API, installation, and more view the [wiki](https://github.com/BetaPictoris/flagdown/wiki).

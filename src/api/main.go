@@ -152,8 +152,8 @@ func main() {
 		Returns a list of projects, or a single project with the projectID ":ID"
 	*/
 	v1api.Get("/projects/:id?", func(c *fiber.Ctx) error {
-		var projects = []Project{}
-		var q = `SELECT * FROM Projects`
+		projects := []Project{}
+		q := `SELECT * FROM Projects`
 
 		if c.Params("id") != "" {
 			q += ` WHERE projectID=` + c.Params("id")
@@ -207,7 +207,7 @@ func main() {
 		Creates a new flag, params match that of FlagNew (struct)
 	*/
 	v1api.Post("/projects/:projectID/flags", func(c *fiber.Ctx) error {
-		var projectID = c.Params("projectID")
+		projectID := c.Params("projectID")
 		flag := new(FlagNew)
 		if err := c.BodyParser(flag); err != nil {
 			c.SendStatus(400)
@@ -241,7 +241,7 @@ func main() {
 		Changes part of a flag's data.
 	*/
 	v1api.Patch("/projects/:projectID/flags/:flagID", func(c *fiber.Ctx) error {
-		var flag = new(FlagNew)
+		flag := new(FlagNew)
 
 		if err := c.BodyParser(flag); err != nil {
 			c.SendStatus(400)
@@ -294,7 +294,7 @@ func main() {
 	*/
 	v1api.Get("/projects/:projectName/flags/:flagName?", func(c *fiber.Ctx) error {
 		// TODO: Fix optional flagName param
-		var flags = []Flag{}
+		flags := []Flag{}
 		var pIDs int
 		var projectName string
 
