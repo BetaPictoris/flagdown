@@ -29,10 +29,10 @@ jobs:
       run: npm install
     
     - name: Build client app
-      run: npm run build
+      run: make build/app
     
     - name: Build Go API
-      run: make api
+      run: make build/api
     
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag flagdown:$(git log | grep commit -m 1 | cut -f2 -d' ')
