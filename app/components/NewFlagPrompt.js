@@ -10,8 +10,8 @@ import {
   AlertDialogOverlay,
   Input,
   Button,
-  useToast
-} from '@chakra-ui/react'
+  useToast,
+} from "@chakra-ui/react";
 
 export default function NewFlagPrompt(props) {
   const [isOpen, setIsOpen] = React.useState(false);
