@@ -14,16 +14,14 @@ data:
 
 # Compile
 api:
-	cd src/api; \
-	  go build
-	mv src/api/flagdown build
+	go build
+	mv flagdown build/flagdown
 
 app:
 	npm run build
 
 # File structure
 dirs:
-	mkdir -pv build
 	mkdir -pv build/data
 
 clean:
