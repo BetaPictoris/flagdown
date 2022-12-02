@@ -1,3 +1,5 @@
+export PATH := node_modules/.bin:$(PATH)
+
 all: dirs api app
 
 # Development
@@ -18,7 +20,7 @@ build/api:
 	mv flagdown build/flagdown
 
 build/app:
-	npm run build
+	BUILD_PATH='./build/app' react-app-rewired build
 
 # File structure
 dirs:
