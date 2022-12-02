@@ -19,9 +19,7 @@ api:
 	mv src/api/flagdown build
 
 app:
-	cd src/app; \
-	  npm run build
-	mv src/app/build build/app
+	npm run build
 
 # File structure
 dirs:
