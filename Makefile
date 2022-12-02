@@ -13,11 +13,11 @@ data:
 	cp examples/config.ini build/data/
 
 # Compile
-api:
+build/api:
 	go build
 	mv flagdown build/flagdown
 
-app:
+build/app:
 	npm run build
 
 # File structure
@@ -27,11 +27,11 @@ dirs:
 clean:
 	rm -rfv build
 
-cleanapi:
+clean/api:
 	rm -v build/flagdown
 
-cleanapp:
+clean/app:
 	rm -rv build/app
 
-cleandata:
+clean/data:
 	rm -rfv build/data
