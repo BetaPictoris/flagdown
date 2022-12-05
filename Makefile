@@ -1,6 +1,6 @@
 export PATH := node_modules/.bin:$(PATH)
 
-all: dirs api app
+all: dirs build
 
 # Development
 start:
@@ -8,13 +8,15 @@ start:
 	  ./flagdown
 
 dev: all data start
-devapp: dirs app start
-devapi: dirs api data start
+dev/app: dirs build/app start
+dev/api: dirs build/api data start
 
 data:
 	cp examples/config.ini build/data/
 
 # Compile
+build: build/api build/app
+
 build/api:
 	go build
 	mv flagdown build/flagdown
