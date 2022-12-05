@@ -148,6 +148,49 @@ func main() {
 	})
 
 	/*
+		PATCH: /api/v1/projects/:ID
+		Updates a part of a project
+	*/
+	v1api.Patch("/projects/:id", func(c *fiber.Ctx) error {
+		project := new(Project)
+
+		if err := c.BodyParser(project); err != nil {
+			c.SendStatus(400)
+			log.Println("Failed to parse project data:", err)
+			return c.SendString("Failed to parse project data")
+		}
+
+		if project.ProjectName != "" {
+			_, err = db.Exec(`UPDATE Projects SET projectName=? WHERE projectID=?`, project.ProjectName, c.Params("id"))
+			if err != nil {
+				c.SendStatus(500)
+				log.Println("Failed to update project name:", err)
+				return c.SendString("Failed to update project name")
+			}
+		}
+
+		var projectRes Project
+
+		projectRows, err := db.Query(`SELECT * FROM Projects WHERE projectID=?`, c.Params("id"))
+		if err != nil {
+			c.SendStatus(500)
+			log.Println("Failed to read projects:", err)
+			return c.SendString("Failed to read projects")
+		}
+
+		for projectRows.Next() {
+			var projectID int
+			var projectName string
+			projectRows.Scan(&projectID, &projectName)
+
+			projectRes = Project{uint8(projectID), projectName}
+		}
+
+		c.SendStatus(200)
+		return c.JSON(projectRes)
+	})
+
+	/*
 		GET: /api/v1/projects/:ID?
 		Returns a list of projects, or a single project with the projectID ":ID"
 	*/
