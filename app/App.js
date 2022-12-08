@@ -2,9 +2,7 @@ import React from "react";
 
 import "./styles/App.scss";
 
-import Flags from "./components/Flags";
-import NewProjectPrompt from "./components/NewProjectPrompt";
-import DeleteProjectPrompt from "./components/DeleteProjectPrompt";
+import Home from "./pages/Home";
 
 export default function App() {
   return (
@@ -12,13 +10,11 @@ export default function App() {
       <div className="Header">{/* TODO: Add a header */}</div>
 
       <div className="AppCont">
-        <NewProjectPrompt />
-        <DeleteProjectPrompt projectID="1" />
-        <Flags projectID="1" />
+        <Home />
       </div>
 
       <div className="Footer">
-        Made with ❤ by <a href="//github.com/BetaPictoris">Beta Pictoris</a>.
+        Made with ❤ by <a target="_blank" href="//www.ozx.me">Beta Pictoris</a>.
       </div>
     </div>
   );
