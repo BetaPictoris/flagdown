@@ -5,6 +5,7 @@ import {
   AccordionPanel,
   Box,
   Badge,
+  Code
 } from "@chakra-ui/react";
 
 import DeleteFlagPrompt from "./DeleteFlagPrompt";
@@ -21,6 +22,7 @@ export default function Flag(props) {
         </AccordionButton>
       </h2>
       <AccordionPanel pb={4}>
+        Value: <Code>{props.flag.Value}</Code>
         <DeleteFlagPrompt
           projectName={props.project.ProjectName}
           flagName={props.flag.flagName}
