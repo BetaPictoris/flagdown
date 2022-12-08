@@ -5,7 +5,7 @@ import {
   AccordionPanel,
   Box,
   Badge,
-  Code
+  Code,
 } from "@chakra-ui/react";
 
 import DeleteFlagPrompt from "./DeleteFlagPrompt";

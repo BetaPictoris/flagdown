@@ -9,10 +9,10 @@ import {
   Th,
   Td,
   TableContainer,
-  Spinner
-} from '@chakra-ui/react'
+  Spinner,
+} from "@chakra-ui/react";
 
-import NewProjectPrompt from "../components/NewProjectPrompt"
+import NewProjectPrompt from "../components/NewProjectPrompt";
 
 export default function Home() {
   const [projects, setProjects] = React.useState([]);
@@ -25,12 +25,12 @@ export default function Home() {
     });
   }, []);
 
-  return(
-    <div className='HomePage Page'>
-      <NewProjectPrompt /> 
+  return (
+    <div className="HomePage Page">
+      <NewProjectPrompt />
 
       <TableContainer>
-        <Table variant='simple'>
+        <Table variant="simple">
           <Thead>
             <Tr>
               <Th>Project Name</Th>
@@ -39,17 +39,20 @@ export default function Home() {
             </Tr>
           </Thead>
           <Tbody>
-            {projects !== [] && projects.map((project) => (
-              <Tr>
-                <Td>{project.ProjectName}</Td>
-                <Td isNumeric>{project.ProjectID}</Td>
-                <Td><a href={`#project/${project.ProjectID}`}>Go</a></Td>
-              </Tr>
-            ))}
+            {projects !== [] &&
+              projects.map((project) => (
+                <Tr>
+                  <Td>{project.ProjectName}</Td>
+                  <Td isNumeric>{project.ProjectID}</Td>
+                  <Td>
+                    <a href={`#project/${project.ProjectID}`}>Go</a>
+                  </Td>
+                </Tr>
+              ))}
             {projects === [] && <Spinner />}
           </Tbody>
         </Table>
       </TableContainer>
     </div>
-  )
+  );
 }
