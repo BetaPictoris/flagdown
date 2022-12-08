@@ -1,6 +1,6 @@
 import { Divider } from "@chakra-ui/react";
 import DeleteProjectPrompt from "../components/DeleteProjectPrompt";
-import Flags from "../components/Flags"
+import Flags from "../components/Flags";
 
 export default function Project(props) {
   return (
@@ -8,8 +8,8 @@ export default function Project(props) {
       <Flags projectID={props.projectID} />
 
       <Divider />
-      
+
       <DeleteProjectPrompt projectID={props.projectID} />
     </div>
-  )
+  );
 }

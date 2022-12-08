@@ -6,7 +6,7 @@ import { Accordion, Divider, Heading } from "@chakra-ui/react";
 import NewFlagPrompt from "./NewFlagPrompt";
 import Flag from "./Flag";
 
-import "./styles/Flags.scss"
+import "./styles/Flags.scss";
 
 export default function Flags(props) {
   const [project, setProject] = React.useState({});
