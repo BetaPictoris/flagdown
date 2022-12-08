@@ -6,6 +6,8 @@ import { Accordion, Divider, Heading } from "@chakra-ui/react";
 import NewFlagPrompt from "./NewFlagPrompt";
 import Flag from "./Flag";
 
+import "./styles/Flags.scss"
+
 export default function Flags(props) {
   const [project, setProject] = React.useState({});
   const [flags, setFlags] = React.useState([]);
@@ -33,11 +35,13 @@ export default function Flags(props) {
 
       <Divider />
 
-      <Accordion allowToggle>
-        {flags.map((flag) => (
-          <Flag key={flag.FlagID} flag={flag} project={project} />
-        ))}
-      </Accordion>
+      <div className="flagList">
+        <Accordion allowToggle>
+          {flags.map((flag) => (
+            <Flag key={flag.FlagID} flag={flag} project={project} />
+          ))}
+        </Accordion>
+      </div>
     </div>
   );
 }
