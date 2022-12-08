@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react'
 
 import Home from "./pages/Home";
+import Project from "./pages/Project";
 
 export default function App() {
   const [path, setPath] = React.useState(window.location.hash.replace("#", "").split("/"));
@@ -33,7 +34,8 @@ export default function App() {
       </div>
 
       <div className="AppCont">
-        <Home />
+        { path[0] === "" && <Home />}
+        { path[0] === "project" && <Project projectID={path[1]} />}
       </div>
 
       <div className="Footer">

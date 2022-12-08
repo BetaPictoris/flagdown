@@ -6,7 +6,7 @@ import { Accordion, Divider, Heading } from "@chakra-ui/react";
 import NewFlagPrompt from "./NewFlagPrompt";
 import Flag from "./Flag";
 
-export default function Projects(props) {
+export default function Flags(props) {
   const [project, setProject] = React.useState({});
   const [flags, setFlags] = React.useState([]);
 
