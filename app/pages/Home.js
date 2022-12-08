@@ -9,6 +9,7 @@ import {
   Th,
   Td,
   TableContainer,
+  Spinner
 } from '@chakra-ui/react'
 
 import NewProjectPrompt from "../components/NewProjectPrompt"
@@ -34,17 +35,18 @@ export default function Home() {
             <Tr>
               <Th>Project Name</Th>
               <Th isNumeric>ID</Th>
-              <Th>Link</Th>
+              <Th></Th>
             </Tr>
           </Thead>
           <Tbody>
-            {projects.map((project) => (
+            {projects !== [] && projects.map((project) => (
               <Tr>
                 <Td>{project.ProjectName}</Td>
                 <Td isNumeric>{project.ProjectID}</Td>
                 <Td><a href={`#project/${project.ProjectID}`}>Go</a></Td>
               </Tr>
             ))}
+            {projects === [] && <Spinner />}
           </Tbody>
         </Table>
       </TableContainer>
