@@ -20,17 +20,21 @@ export default function App() {
   return (
     <div className="App">
       <div className="Header">
-      <Breadcrumb>
-        <BreadcrumbItem>
-          <BreadcrumbLink href='#'>Home</BreadcrumbLink>
-        </BreadcrumbItem>
-
-        {path.map((i) => (
+        <Breadcrumb>
           <BreadcrumbItem>
-            <BreadcrumbLink>{i}</BreadcrumbLink>
+            <BreadcrumbLink>🚩</BreadcrumbLink>
           </BreadcrumbItem>
-        ))}
-      </Breadcrumb>
+
+          <BreadcrumbItem>
+            <BreadcrumbLink href='#'>Home</BreadcrumbLink>
+          </BreadcrumbItem>
+
+          {path.map((i) => (
+            <BreadcrumbItem>
+              <BreadcrumbLink>{i}</BreadcrumbLink>
+            </BreadcrumbItem>
+          ))}
+        </Breadcrumb>
       </div>
 
       <div className="AppCont">
