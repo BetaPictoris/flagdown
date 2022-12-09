@@ -25,8 +25,7 @@ export default function Flag(props) {
         <div className="flagDescription">
           {props.flag.Description
             ? props.flag.Description
-            : "This flag has no description."
-          }
+            : "This flag has no description."}
         </div>
 
         <div className="flagValueBox">
