@@ -4,7 +4,7 @@ A self-hosted Go-based feature flag system
 
 ## :rocket: Features
 
-- A minimal React dashboard (coming soon).
+- A minimal React dashboard.
 - A simple API and Server written in Go.
 
 ## :memo: Documentation
