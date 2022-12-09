@@ -43,7 +43,7 @@ export default function App() {
       </div>
 
       <div className="Footer">
-        Made with ❤ by <a target="_blank" href="//www.ozx.me">Beta Pictoris</a>.
+        Made with ❤ by <a target="_blank" rel="noreferrer" href="//www.ozx.me">Beta Pictoris</a>.
       </div>
     </div>
   );
