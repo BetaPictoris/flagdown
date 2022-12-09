@@ -47,7 +47,7 @@ export default function NewFlagPrompt(props) {
     } else {
       axios.post(`/api/v1/projects/${props.projectID}/flags`, {
         FlagName: flagName,
-        FlagValue: flagValue,
+        Value: flagValue,
       });
       toast({
         title: "Flag created!",
