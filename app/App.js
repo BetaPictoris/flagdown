@@ -2,11 +2,7 @@ import React from "react";
 
 import "./styles/App.scss";
 
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-} from '@chakra-ui/react'
+import URLPathBreadcrumb from "./components/URLPathBreadcrumb";
 
 import Home from "./pages/Home";
 import Project from "./pages/Project";
@@ -20,21 +16,7 @@ export default function App() {
   return (
     <div className="App">
       <div className="Header">
-        <Breadcrumb>
-          <BreadcrumbItem>
-            <span>🚩</span>
-          </BreadcrumbItem>
-
-          <BreadcrumbItem>
-            <BreadcrumbLink href='#'>Home</BreadcrumbLink>
-          </BreadcrumbItem>
-
-          {path.map((i) => (
-            <BreadcrumbItem>
-              <span>{i}</span>
-            </BreadcrumbItem>
-          ))}
-        </Breadcrumb>
+        <URLPathBreadcrumb path={path} />
       </div>
 
       <div className="AppCont">
