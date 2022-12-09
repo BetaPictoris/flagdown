@@ -15,12 +15,14 @@ import {
 import NewProjectPrompt from "../components/NewProjectPrompt";
 
 export default function Home() {
+  const [projectLoaded, setProjectLoaded] = React.useState(false);
   const [projects, setProjects] = React.useState([]);
 
   React.useEffect(() => {
     axios(`/api/v1/projects`).then((response) => {
       if (response.data) {
         setProjects(response.data);
+        setProjectLoaded(true);
       }
     });
   }, []);
@@ -49,7 +51,7 @@ export default function Home() {
                   </Td>
                 </Tr>
               ))}
-            {projects === [] && <Spinner />}
+            {!projectLoaded && <Spinner className="projectLoadingSpinner" />}
           </Tbody>
         </Table>
       </TableContainer>
