@@ -64,9 +64,9 @@ export default function DeleteProjectPrompt(props) {
   return (
     <>
       <Button colorScheme="red" onClick={onOpen}>
-        {!project.ProjectName
-          ? <Spinner />
-          : <>Delete {project.ProjectName}</>
+        {project.ProjectName
+          ? <>Delete {project.ProjectName}</>
+          : <Spinner />
         }
       </Button>
 
