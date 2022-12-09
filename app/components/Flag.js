@@ -22,10 +22,11 @@ export default function Flag(props) {
         </AccordionButton>
       </h2>
       <AccordionPanel pb={4}>
-        <div className="flag">
+        <div className="flagDescription">
           {props.flag.Description
             ? props.flag.Description
-            : "This flag has no description."}
+            : "This flag has no description."
+          }
         </div>
 
         <div className="flagValueBox">
