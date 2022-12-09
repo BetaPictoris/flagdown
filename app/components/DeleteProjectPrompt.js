@@ -11,7 +11,7 @@ import {
   Input,
   Button,
   useToast,
-  Spinner
+  Spinner,
 } from "@chakra-ui/react";
 
 export default function DeleteProjectPrompt(props) {
@@ -64,10 +64,7 @@ export default function DeleteProjectPrompt(props) {
   return (
     <>
       <Button colorScheme="red" onClick={onOpen}>
-        {project.ProjectName
-          ? <>Delete {project.ProjectName}</>
-          : <Spinner />
-        }
+        {project.ProjectName ? <>Delete {project.ProjectName}</> : <Spinner />}
       </Button>
 
       <AlertDialog
