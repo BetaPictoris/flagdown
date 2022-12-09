@@ -22,7 +22,7 @@ export default function App() {
       <div className="Header">
         <Breadcrumb>
           <BreadcrumbItem>
-            <BreadcrumbLink>🚩</BreadcrumbLink>
+            <span>🚩</span>
           </BreadcrumbItem>
 
           <BreadcrumbItem>
@@ -31,7 +31,7 @@ export default function App() {
 
           {path.map((i) => (
             <BreadcrumbItem>
-              <BreadcrumbLink>{i}</BreadcrumbLink>
+              <span>{i}</span>
             </BreadcrumbItem>
           ))}
         </Breadcrumb>
