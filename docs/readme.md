@@ -2,6 +2,9 @@
 
 A self-hosted Go-based feature flag system
 
+> **Warning**: 
+> Flagdown is in an early beta. Please [report issues](https://github.com/BetaPictoris/flagdown/issues) and [request features](https://github.com/BetaPictoris/flagdown/discussions).
+
 ## :rocket: Features
 
 - A minimal React dashboard.
