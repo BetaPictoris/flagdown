@@ -7,7 +7,7 @@ A self-hosted Go-based feature flag system
 > [report issues](https://github.com/BetaPictoris/flagdown/issues) and
 > [request features](https://github.com/BetaPictoris/flagdown/discussions).
 
-## What is Flagdown?
+## :interrobang: What is Flagdown?
 
 Flagdown is a free and open source feature flag system, similar to ConfigCat or
 LaunchDarkly. An example of flags would be how Discord's "experiments" works
