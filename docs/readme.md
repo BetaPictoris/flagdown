@@ -2,6 +2,12 @@
 
 A self-hosted Go-based feature flag system
 
+## What is Flagdown?
+
+Flagdown is a free and open source feature flag system, similar to ConfigCat or
+LaunchDarkly. An example of flags would be how Discord's "experiments" works
+where you can toggle certain beta features. 
+
 ## :rocket: Features
 
 - A minimal React dashboard.
