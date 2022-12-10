@@ -2,6 +2,11 @@
 
 A self-hosted Go-based feature flag system
 
+> **Warning**:
+> Flagdown is in an early beta. Please 
+> [report issues](https://github.com/BetaPictoris/flagdown/issues) and
+> [request features](https://github.com/BetaPictoris/flagdown/discussions).
+
 ## What is Flagdown?
 
 Flagdown is a free and open source feature flag system, similar to ConfigCat or
