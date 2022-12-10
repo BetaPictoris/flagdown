@@ -1,17 +1,14 @@
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-} from '@chakra-ui/react'
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
 
-export default function URLPathBreadcrumb(props) { return (
+export default function URLPathBreadcrumb(props) {
+  return (
     <Breadcrumb>
       <BreadcrumbItem>
         <span>🚩</span>
       </BreadcrumbItem>
 
       <BreadcrumbItem>
-        <BreadcrumbLink href='#'>Home</BreadcrumbLink>
+        <BreadcrumbLink href="#">Home</BreadcrumbLink>
       </BreadcrumbItem>
 
       {props.path.map((i) => (
@@ -20,5 +17,5 @@ export default function URLPathBreadcrumb(props) { return (
         </BreadcrumbItem>
       ))}
     </Breadcrumb>
-  )
+  );
 }
