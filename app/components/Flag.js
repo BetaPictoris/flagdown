@@ -39,9 +39,7 @@ export default function Flag(props) {
           flagName={props.flag.flagName}
         />
 
-        <RenameFlagPrompt
-          flag={props.flag}
-        />
+        <RenameFlagPrompt flag={props.flag} />
       </AccordionPanel>
     </AccordionItem>
   );
