@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import { Button, Center, Flex, Input, Text, useToast } from "@chakra-ui/react";
 
+import "./styles/FlagValue.scss"
+
 export default function FlagValue(props) {
   const [value, setValue] = React.useState(props.flag.Value);
   const handleChange = (event) => setValue(event.target.value);
