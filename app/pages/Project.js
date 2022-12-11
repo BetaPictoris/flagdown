@@ -1,3 +1,5 @@
+import React from 'react'
+import axios from 'axios'
 import { Heading, Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 
 import Flags from "../components/Flags"
