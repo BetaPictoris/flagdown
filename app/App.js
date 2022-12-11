@@ -2,7 +2,7 @@ import React from "react";
 
 import "./styles/App.scss";
 
-import URLPathBreadcrumb from "./components/URLPathBreadcrumb";
+import Header from "./components/Header";
 
 import Home from "./pages/Home";
 import Project from "./pages/Project";
@@ -18,7 +18,7 @@ export default function App() {
   return (
     <div className="App">
       <div className="Header">
-        <URLPathBreadcrumb path={path} />
+        <Header />
       </div>
 
       <div className="AppCont">
