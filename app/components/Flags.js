@@ -10,16 +10,9 @@ import "./styles/Flags.scss";
 
 export default function Flags(props) {
   const [flagsLoaded, setFlagsLoaded] = React.useState(false);
-  const [project, setProject] = React.useState({});
   const [flags, setFlags] = React.useState([]);
 
-  React.useEffect(() => {
-    axios(`/api/v1/projects/${props.projectID}`).then((response) => {
-      if (response.data) {
-        setProject(response.data[0]);
-      }
-    });
-  }, [props.projectID]);
+  const project = props.project
 
   React.useEffect(() => {
     axios(`/api/v1/projects/${project.ProjectName}/flags`).then((response) => {
