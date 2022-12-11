@@ -7,7 +7,7 @@ import {
   TabPanels,
   Tab,
   TabPanel,
-  Spinner
+  Spinner,
 } from "@chakra-ui/react";
 
 import Flags from "../components/Flags";
@@ -28,26 +28,26 @@ export default function Project(props) {
 
   return (
     <div className="ProjectPage Page">
-      {projectLoaded ? ( 
-      <div>
-        <Heading as="h2">{project.ProjectName}</Heading>
+      {projectLoaded ? (
+        <div>
+          <Heading as="h2">{project.ProjectName}</Heading>
 
-        <Tabs>
-          <TabList>
-            <Tab>Flags</Tab>
-            <Tab>Settings</Tab>
-          </TabList>
+          <Tabs>
+            <TabList>
+              <Tab>Flags</Tab>
+              <Tab>Settings</Tab>
+            </TabList>
 
-          <TabPanels>
-            <TabPanel>
-              <Flags project={project} />
-            </TabPanel>
-            <TabPanel>
-              <ProjectSettings project={project} />
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
-      </div>
+            <TabPanels>
+              <TabPanel>
+                <Flags project={project} />
+              </TabPanel>
+              <TabPanel>
+                <ProjectSettings project={project} />
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
+        </div>
       ) : (
         <Spinner />
       )}
