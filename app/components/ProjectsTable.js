@@ -50,5 +50,5 @@ export default function ProjectsTable(props) {
         </Tbody>
       </Table>
     </TableContainer>
-  )
+  );
 }
