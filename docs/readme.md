@@ -2,6 +2,8 @@
 
 A self-hosted Go-based feature flag system
 
+[![flagdown](https://cdn.ozx.me/betapictoris/flagdown.svg)](https://github.com/BetaPictoris/flagdown)
+
 > **Warning**:
 > Flagdown is in an early beta. Please
 > [report issues](https://github.com/BetaPictoris/flagdown/issues) and
