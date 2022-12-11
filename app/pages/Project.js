@@ -1,9 +1,16 @@
-import React from 'react'
-import axios from 'axios'
-import { Heading, Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
+import React from "react";
+import axios from "axios";
+import {
+  Heading,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+} from "@chakra-ui/react";
 
-import Flags from "../components/Flags"
-import ProjectSettings from '../components/ProjectSettings';
+import Flags from "../components/Flags";
+import ProjectSettings from "../components/ProjectSettings";
 
 export default function Project(props) {
   const [project, setProject] = React.useState({});
@@ -19,7 +26,7 @@ export default function Project(props) {
   return (
     <div className="ProjectPage Page">
       <Heading as="h2">{project.ProjectName}</Heading>
-      
+
       <Tabs>
         <TabList>
           <Tab>Flags</Tab>
@@ -36,5 +43,5 @@ export default function Project(props) {
         </TabPanels>
       </Tabs>
     </div>
-  )
+  );
 }

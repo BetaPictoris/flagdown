@@ -12,7 +12,7 @@ export default function Flags(props) {
   const [flagsLoaded, setFlagsLoaded] = React.useState(false);
   const [flags, setFlags] = React.useState([]);
 
-  const project = props.project
+  const project = props.project;
 
   React.useEffect(() => {
     axios(`/api/v1/projects/${project.ProjectName}/flags`).then((response) => {
