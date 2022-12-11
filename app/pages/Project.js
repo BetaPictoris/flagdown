@@ -1,12 +1,22 @@
 import { Heading, Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 
-import DeleteProjectPrompt from "../components/DeleteProjectPrompt";
 import Flags from "../components/Flags"
+import ProjectSettings from '../components/ProjectSettings';
 
 export default function Project(props) {
+  const [project, setProject] = React.useState({});
+
+  React.useEffect(() => {
+    axios(`/api/v1/projects/${props.projectID}`).then((response) => {
+      if (response.data) {
+        setProject(response.data[0]);
+      }
+    });
+  }, [props.projectID]);
+
   return (
     <div className="ProjectPage Page">
-      <Heading as="h2">{props.ProjectName}</Heading>
+      <Heading as="h2">{project.ProjectName}</Heading>
       
       <Tabs>
         <TabList>
@@ -16,10 +26,10 @@ export default function Project(props) {
 
         <TabPanels>
           <TabPanel>
-            <Flags projectID={props.projectID} />
+            <Flags project={project} />
           </TabPanel>
           <TabPanel>
-            <DeleteProjectPrompt projectID={props.projectID} />
+            <ProjectSettings project={project} />
           </TabPanel>
         </TabPanels>
       </Tabs>
