@@ -38,7 +38,7 @@ export default function ProjectsTable(props) {
         <Tbody>
           {projects !== [] &&
             projects.map((project) => (
-              <Tr>
+              <Tr key={project.ProjectID}>
                 <Td>{project.ProjectName}</Td>
                 <Td isNumeric>{project.ProjectID}</Td>
                 <Td>

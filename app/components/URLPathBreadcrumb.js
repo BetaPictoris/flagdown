@@ -12,7 +12,7 @@ export default function URLPathBreadcrumb(props) {
       </BreadcrumbItem>
 
       {props.path.map((i) => (
-        <BreadcrumbItem>
+        <BreadcrumbItem key={i}>
           <span>{i}</span>
         </BreadcrumbItem>
       ))}
