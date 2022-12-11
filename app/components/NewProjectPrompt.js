@@ -56,7 +56,7 @@ export default function NewProjectPrompt() {
   return (
     <>
       <Button colorScheme="green" onClick={onOpen}>
-        Create new project
+        New project
       </Button>
 
       <AlertDialog
@@ -67,7 +67,7 @@ export default function NewProjectPrompt() {
         <AlertDialogOverlay>
           <AlertDialogContent>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Create new project
+              Create a new project
             </AlertDialogHeader>
 
             <AlertDialogBody>

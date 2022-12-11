@@ -62,7 +62,7 @@ export default function NewFlagPrompt(props) {
   return (
     <>
       <Button color="green" onClick={onOpen}>
-        Create a new flag
+        New flag
       </Button>
 
       <AlertDialog
