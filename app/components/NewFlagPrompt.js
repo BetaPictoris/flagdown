@@ -56,6 +56,7 @@ export default function NewFlagPrompt(props) {
         duration: 2000,
         isClosable: true,
       });
+      window.location.reload();
     }
   }
 

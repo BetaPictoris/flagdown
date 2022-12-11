@@ -50,6 +50,7 @@ export default function DeleteProjectPrompt(props) {
         duration: 2000,
         isClosable: true,
       });
+      window.location.reload();
     } else {
       toast({
         title: "Failed to delete project.",
