@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 
-import { Accordion, Divider, Heading, Spinner } from "@chakra-ui/react";
+import { Accordion, Divider, Spinner } from "@chakra-ui/react";
 
 import NewFlagPrompt from "./NewFlagPrompt";
 import Flag from "./Flag";
@@ -25,7 +25,6 @@ export default function Flags(props) {
 
   return (
     <div className="Projects">
-      <Heading as="h3">Flags</Heading>
       <NewFlagPrompt projectID={project.ProjectID} />
 
       <Divider />
