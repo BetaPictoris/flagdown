@@ -8,7 +8,9 @@ import {
 } from "@chakra-ui/react";
 
 import FlagValue from "./FlagValue";
+
 import DeleteFlagPrompt from "./DeleteFlagPrompt";
+import RenameFlagPrompt from "./RenameFlagPrompt";
 
 export default function Flag(props) {
   return (
@@ -36,6 +38,8 @@ export default function Flag(props) {
           projectName={props.project.ProjectName}
           flagName={props.flag.flagName}
         />
+
+        <RenameFlagPrompt flag={props.flag} />
       </AccordionPanel>
     </AccordionItem>
   );

@@ -32,7 +32,7 @@ export default function ProjectsTable() {
           <Tr>
             <Th>Project Name</Th>
             <Th isNumeric>ID</Th>
-            <Th></Th>
+            <Th />
           </Tr>
         </Thead>
         <Tbody>
