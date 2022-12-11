@@ -12,7 +12,7 @@ import {
   Spinner,
 } from "@chakra-ui/react";
 
-export default function ProjectsTable(props) {
+export default function ProjectsTable() {
   const [projectLoaded, setProjectLoaded] = React.useState(false);
   const [projects, setProjects] = React.useState([]);
 
