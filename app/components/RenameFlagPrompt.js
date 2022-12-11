@@ -71,7 +71,7 @@ export default function RenameFlagPrompt(props) {
             <AlertDialogHeader>Rename flag</AlertDialogHeader>
 
             <AlertDialogBody>
-              This will rename "{props.flag.FlagName}".
+              This will rename &quot;{props.flag.FlagName}&quot;.
               <Text>Flag name:</Text>
               <Input
                 value={newFlagName}

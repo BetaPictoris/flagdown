@@ -80,7 +80,7 @@ export default function DeleteProjectPrompt(props) {
             </AlertDialogHeader>
 
             <AlertDialogBody>
-              Type "{project.ProjectName}" to confirm this action.
+              Type &quot;{project.ProjectName}&quot; to confirm this action.
               <Input
                 value={projectName}
                 onChange={handleProjectNameChange}

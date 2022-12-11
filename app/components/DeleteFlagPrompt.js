@@ -65,7 +65,7 @@ export default function DeleteFlagPrompt(props) {
             <AlertDialogHeader>Delete flag</AlertDialogHeader>
 
             <AlertDialogBody>
-              This will delete "{flag.FlagName}" and can not be undone.
+              This will delete &quot;{flag.FlagName}&quot; and can not be undone.
             </AlertDialogBody>
 
             <AlertDialogFooter>

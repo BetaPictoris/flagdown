@@ -71,7 +71,7 @@ export default function RenameProjectPrompt(props) {
             <AlertDialogHeader>Rename Project</AlertDialogHeader>
 
             <AlertDialogBody>
-              This will rename "{props.project.ProjectName}".
+              This will rename &quot;{props.project.ProjectName}&quot;.
               <Text>Project name:</Text>
               <Input
                 value={newProjectName}
