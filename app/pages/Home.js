@@ -8,7 +8,9 @@ import ProjectsTable from "../components/ProjectsTable";
 export default function Home() {
   return (
     <div className="HomePage Page">
-      <Heading as="h2" size="lg">Home</Heading>
+      <Heading as="h2" size="lg">
+        Home
+      </Heading>
 
       <NewProjectPrompt />
       <ProjectsTable />
