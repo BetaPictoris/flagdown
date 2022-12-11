@@ -9,7 +9,7 @@ export default function ProjectSettings(props) {
   return (
     <div className="ProjectSettings">
       <Box
-        className="infoZone"
+        className="infoZone projectSettingsBox"
         borderWidth="1px"
         borderRadius="lg"
         overflow="hidden"
@@ -19,7 +19,7 @@ export default function ProjectSettings(props) {
 
       <Heading as="h3">Danager Zone</Heading>
       <Box
-        className="dangerZone"
+        className="dangerZone projectSettingsBox"
         borderWidth="1px"
         borderRadius="lg"
         overflow="hidden"
