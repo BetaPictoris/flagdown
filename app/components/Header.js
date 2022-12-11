@@ -10,7 +10,7 @@ export default function Header() {
   return (
     <Flex className="Header" minWidth='max-content' alignItems='center' gap='2'>
       <Box p='2'>
-        <Heading size='md'>
+        <Heading as='h1' size='xl'>
           <a href="/app">Flagdown</a>
         </Heading>
       </Box>
