@@ -5,7 +5,6 @@ import {
   AccordionPanel,
   Box,
   Badge,
-  Code,
 } from "@chakra-ui/react";
 
 import FlagValue from "./FlagValue";
