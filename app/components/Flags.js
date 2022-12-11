@@ -32,7 +32,7 @@ export default function Flags(props) {
 
   return (
     <div className="Projects">
-      <Heading as="h2">Flags</Heading>
+      <Heading as="h3">Flags</Heading>
       <NewFlagPrompt projectID={project.ProjectID} />
 
       <Divider />
