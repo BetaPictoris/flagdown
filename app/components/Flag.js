@@ -8,6 +8,7 @@ import {
   Code,
 } from "@chakra-ui/react";
 
+import FlagValue from "./FlagValue";
 import DeleteFlagPrompt from "./DeleteFlagPrompt";
 
 export default function Flag(props) {
@@ -29,7 +30,7 @@ export default function Flag(props) {
         </div>
 
         <div className="flagValueBox">
-          Value: <Code>{props.flag.Value}</Code>
+          <FlagValue flag={props.flag} />
         </div>
 
         <DeleteFlagPrompt
