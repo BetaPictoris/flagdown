@@ -30,7 +30,7 @@ export default function Project(props) {
     <div className="ProjectPage Page">
       {projectLoaded ? (
         <div>
-          <Heading as="h2">{project.ProjectName}</Heading>
+          <Heading as="h2" size="lg">{project.ProjectName}</Heading>
 
           <Tabs>
             <TabList>
