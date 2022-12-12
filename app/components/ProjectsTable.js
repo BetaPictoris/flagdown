@@ -7,10 +7,11 @@ import {
   Tbody,
   Tr,
   Th,
-  Td,
   TableContainer,
   Spinner,
 } from "@chakra-ui/react";
+
+import ProjectsTableRow from "./ProjectsTableRow";
 
 export default function ProjectsTable() {
   const [projectLoaded, setProjectLoaded] = React.useState(false);
@@ -38,13 +39,10 @@ export default function ProjectsTable() {
         <Tbody>
           {projects !== [] &&
             projects.map((project) => (
-              <Tr key={project.ProjectID}>
-                <Td>{project.ProjectName}</Td>
-                <Td isNumeric>{project.ProjectID}</Td>
-                <Td>
-                  <a href={`#project/${project.ProjectID}`}>Go</a>
-                </Td>
-              </Tr>
+              <ProjectsTableRow 
+                key={project.ProjectID}
+                project={project}
+              />
             ))}
           {!projectLoaded && <Spinner className="projectLoadingSpinner" />}
         </Tbody>
