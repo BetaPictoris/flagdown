@@ -33,10 +33,10 @@ jobs:
       run: make build/api
     
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ghcr.io/betapictoris/flagdown:${{ github.event.release.tag_name }}
+      run: docker build . --file Dockerfile --tag ghcr.io/betapictoris/flagdown:latest
 
     - name: Login to GitHub Container registry
       run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u BetaPictoris --password-stdin
     
     - name: Push to GitHub Containers registry
-      run: docker push ghcr.io/betapictoris/flagdown:${{ github.event.release.tag_name }}
+      run: docker push ghcr.io/betapictoris/flagdown:latest
