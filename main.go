@@ -299,13 +299,6 @@ func main() {
 			return c.SendString("Failed to parse flag data")
 		}
 
-		i := sort.SearchStrings(FLAG_TYPES, flag.FlagType)
-		if i == len(FLAG_TYPES) {
-			c.SendStatus(400)
-			log.Println("Failed to update flag: FlagType not found")
-			return c.SendString("Failed to update flag")
-		}
-
 		if flag.FlagName != "" {
 			_, err = db.Exec(`UPDATE Flags SET flagName=? WHERE flagID=?`, flag.FlagName, c.Params("flagID"))
 			if err != nil {
@@ -325,6 +318,13 @@ func main() {
 		}
 
 		if flag.FlagType != "" {
+			i := sort.SearchStrings(FLAG_TYPES, flag.FlagType)
+			if i == len(FLAG_TYPES) {
+				c.SendStatus(400)
+				log.Println("Failed to update flag: FlagType not found")
+				return c.SendString("Failed to update flag")
+			}
+
 			_, err = db.Exec(`UPDATE Flags set flagType=? WHERE flagID=?`, flag.FlagType, c.Params("flagID"))
 			if err != nil {
 				c.SendStatus(500)
