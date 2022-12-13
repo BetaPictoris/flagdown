@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
 	"log"
+	"sort"
 	"strconv"
 
 	"github.com/gofiber/fiber/v2"
@@ -18,6 +19,10 @@ import (
 const (
 	API_SERVER_VERSION = "0.0.1"
 	API_VERSION        = "v1"
+)
+
+var (
+	FLAG_TYPES = []string{"string", "int", "bool"}
 )
 
 func main() {
@@ -49,6 +54,7 @@ func main() {
   flagID INTEGER PRIMARY KEY AUTOINCREMENT, 
   projectID INTEGER NOT NULL,
   flagName varchar(255) NOT NULL,
+  flagType varchar(255) NOT NULL,
   value text NOT NULL
   );`)
 	if err != nil {
@@ -259,7 +265,7 @@ func main() {
 		}
 
 		// Insert the new flag into the Flags table
-		queryFlags, err := db.Exec(`INSERT INTO Flags VALUES (NULL, ?, ?, ?)`, projectID, flag.FlagName, flag.Value)
+		queryFlags, err := db.Exec(`INSERT INTO Flags VALUES (NULL, ?, ?, ?, ?)`, projectID, flag.FlagName, flag.FlagType, flag.Value)
 		if err != nil {
 			c.SendStatus(500)
 			log.Println("Failed to create new flag:", err)
@@ -275,6 +281,7 @@ func main() {
 			"FlagID":    fID,
 			"ProjectID": uint8(pID),
 			"FlagName":  flag.FlagName,
+			"FlagType":  flag.FlagType,
 			"FlagValue": flag.Value,
 		})
 	})
@@ -290,6 +297,13 @@ func main() {
 			c.SendStatus(400)
 			log.Println("Failed to parse flag data:", err)
 			return c.SendString("Failed to parse flag data")
+		}
+
+		i := sort.SearchStrings(FLAG_TYPES, flag.FlagType)
+		if i == len(FLAG_TYPES) {
+			c.SendStatus(400)
+			log.Println("Failed to update flag: FlagType not found")
+			return c.SendString("Failed to update flag")
 		}
 
 		if flag.FlagName != "" {
@@ -310,6 +324,15 @@ func main() {
 			}
 		}
 
+		if flag.FlagType != "" {
+			_, err = db.Exec(`UPDATE Flags set flagType=? WHERE flagID=?`, flag.FlagType, c.Params("flagID"))
+			if err != nil {
+				c.SendStatus(500)
+				log.Println("Failed to update flag type:", err)
+				return c.SendString("Failed to update flag type")
+			}
+		}
+
 		var flagRes Flag
 
 		flagRows, err := db.Query(`SELECT * FROM Flags WHERE flagID=?`, c.Params("flagID"))
@@ -321,10 +344,10 @@ func main() {
 
 		for flagRows.Next() {
 			var flagID, projectID int
-			var flagName, value string
-			flagRows.Scan(&flagID, &projectID, &flagName, &value)
+			var flagName, flagType, value string
+			flagRows.Scan(&flagID, &projectID, &flagName, &flagType, &value)
 
-			flagRes = Flag{uint8(flagID), uint8(projectID), flagName, value}
+			flagRes = Flag{uint8(flagID), uint8(projectID), flagName, flagType, value}
 		}
 
 		c.SendStatus(200)
@@ -363,10 +386,10 @@ func main() {
 
 		for flagRows.Next() {
 			var flagID, projectID int
-			var flagName, value string
-			flagRows.Scan(&flagID, &projectID, &flagName, &value)
+			var flagName, flagType, value string
+			flagRows.Scan(&flagID, &projectID, &flagName, &flagType, &value)
 
-			flags = append(flags, Flag{uint8(flagID), uint8(projectID), flagName, value})
+			flags = append(flags, Flag{uint8(flagID), uint8(projectID), flagName, flagType, value})
 		}
 
 		c.SendStatus(200)
@@ -443,10 +466,12 @@ type Flag struct {
 	FlagID    uint8
 	ProjectID uint8
 	FlagName  string
+	FlagType  string
 	Value     string
 }
 
 type FlagNew struct {
 	FlagName string
+	FlagType string
 	Value    string
 }
