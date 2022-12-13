@@ -264,6 +264,13 @@ func main() {
 			return c.SendString("Failed to parse flag data")
 		}
 
+		i := sort.SearchStrings(FLAG_TYPES, flag.FlagType)
+		if i == len(FLAG_TYPES) {
+			c.SendStatus(400)
+			log.Println("Failed to update flag: FlagType not found")
+			return c.SendString("Failed to update flag")
+		}
+
 		// Insert the new flag into the Flags table
 		queryFlags, err := db.Exec(`INSERT INTO Flags VALUES (NULL, ?, ?, ?, ?)`, projectID, flag.FlagName, flag.FlagType, flag.Value)
 		if err != nil {
