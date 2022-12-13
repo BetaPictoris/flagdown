@@ -21,9 +21,7 @@ const (
 	API_VERSION        = "v1"
 )
 
-var (
-	FLAG_TYPES = []string{"string", "int", "bool"}
-)
+var FLAG_TYPES = []string{"string", "int", "bool"}
 
 func main() {
 	log.Println("Opening config file...")
