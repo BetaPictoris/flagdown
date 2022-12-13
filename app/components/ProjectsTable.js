@@ -39,10 +39,7 @@ export default function ProjectsTable() {
         <Tbody>
           {projects !== [] &&
             projects.map((project) => (
-              <ProjectsTableRow 
-                key={project.ProjectID}
-                project={project}
-              />
+              <ProjectsTableRow key={project.ProjectID} project={project} />
             ))}
           {!projectLoaded && <Spinner className="projectLoadingSpinner" />}
         </Tbody>
