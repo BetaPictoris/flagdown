@@ -5,8 +5,9 @@ services:
     image: ghcr.io/betapictoris/flagdown
     container_name: Flagdown
     restart: unless-stopped
-
-    ./data:/app/data
+    
+    volumes:
+      - ./data:/app/data
 
     ports:
       - 3000:3000
