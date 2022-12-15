@@ -1,4 +1,4 @@
-FROM busybox:1
+FROM debian:buster
 WORKDIR /app
 
 COPY build .
