@@ -1,6 +1,6 @@
-FROM alpine:3
+FROM busybox:1
 WORKDIR /app
 
 COPY build .
 
-CMD ["flagdown"]
+CMD ["/app/flagdown"]
