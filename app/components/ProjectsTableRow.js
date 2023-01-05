@@ -1,7 +1,4 @@
-import {
-  Tr,
-  Td,
-} from "@chakra-ui/react";
+import { Tr, Td } from "@chakra-ui/react";
 
 export default function ProjectsTableRow(props) {
   return (
@@ -12,5 +9,5 @@ export default function ProjectsTableRow(props) {
         <a href={`#project/${props.project.ProjectID}`}>Go</a>
       </Td>
     </Tr>
-  )
+  );
 }
