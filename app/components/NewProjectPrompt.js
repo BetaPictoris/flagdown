@@ -22,15 +22,7 @@ export default function NewProjectPrompt() {
   const handleProjectNameChange = (event) =>
     setProjectName(event.target.value.toLowerCase().replace(" ", "-"));
 
-  function onClose() {
-    setIsOpen(false);
-  }
-
-  function onOpen() {
-    setIsOpen(true);
-  }
-
-  function onCreate() {
+  const onCreate = () => {
     setIsOpen(false);
 
     if (projectName === "") {
@@ -53,18 +45,18 @@ export default function NewProjectPrompt() {
 
       window.location.reload();
     }
-  }
+  };
 
   return (
     <>
-      <Button colorScheme="green" onClick={onOpen}>
+      <Button colorScheme="green" onClick={() => setIsOpen(true)}>
         New project
       </Button>
 
       <AlertDialog
         isOpen={isOpen}
         leastDestructiveRef={cancelRef}
-        onClose={onClose}
+        onClose={() => setIsOpen(false)}
       >
         <AlertDialogOverlay>
           <AlertDialogContent>
@@ -82,7 +74,7 @@ export default function NewProjectPrompt() {
             </AlertDialogBody>
 
             <AlertDialogFooter>
-              <Button ref={cancelRef} onClick={onClose}>
+              <Button ref={cancelRef} onClick={() => setIsOpen(false)}>
                 Cancel
               </Button>
               <Button colorScheme="green" onClick={onCreate} ml={3}>

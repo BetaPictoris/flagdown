@@ -31,15 +31,7 @@ export default function DeleteProjectPrompt(props) {
     });
   }, [props.projectID]);
 
-  function onClose() {
-    setIsOpen(false);
-  }
-
-  function onOpen() {
-    setIsOpen(true);
-  }
-
-  function onDelete() {
+  const onDelete = () => {
     setIsOpen(false);
 
     if (projectName === project.ProjectName) {
@@ -60,18 +52,18 @@ export default function DeleteProjectPrompt(props) {
         isClosable: true,
       });
     }
-  }
+  };
 
   return (
     <>
-      <Button colorScheme="red" onClick={onOpen}>
+      <Button colorScheme="red" onClick={() => setIsOpen(true)}>
         {project.ProjectName ? <>Delete {project.ProjectName}</> : <Spinner />}
       </Button>
 
       <AlertDialog
         isOpen={isOpen}
         leastDestructiveRef={cancelRef}
-        onClose={onClose}
+        onClose={() => setIsOpen(false)}
       >
         <AlertDialogOverlay>
           <AlertDialogContent>
@@ -90,7 +82,7 @@ export default function DeleteProjectPrompt(props) {
             </AlertDialogBody>
 
             <AlertDialogFooter>
-              <Button ref={cancelRef} onClick={onClose}>
+              <Button ref={cancelRef} onClick={() => setIsOpen(false)}>
                 Cancel
               </Button>
               <Button colorScheme="red" onClick={onDelete} ml={3}>

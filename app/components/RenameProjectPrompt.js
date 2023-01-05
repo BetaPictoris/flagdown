@@ -25,14 +25,6 @@ export default function RenameProjectPrompt(props) {
   const handleProjectNameChange = (event) =>
     setNewProjectName(event.target.value);
 
-  const onClose = () => {
-    setIsOpen(false);
-  };
-
-  const onOpen = () => {
-    setIsOpen(true);
-  };
-
   const onRename = () => {
     setIsOpen(false);
 
@@ -57,14 +49,14 @@ export default function RenameProjectPrompt(props) {
 
   return (
     <>
-      <Button onClick={onOpen} colorScheme="yellow">
+      <Button onClick={() => setIsOpen(true)} colorScheme="yellow">
         Rename {props.project.ProjectName}
       </Button>
 
       <AlertDialog
         isOpen={isOpen}
         leastDestructiveRef={cancelRef}
-        onClose={onClose}
+        onClose={() => setIsOpen(false)}
       >
         <AlertDialogOverlay>
           <AlertDialogContent>
@@ -82,7 +74,7 @@ export default function RenameProjectPrompt(props) {
             </AlertDialogBody>
 
             <AlertDialogFooter>
-              <Button ref={cancelRef} onClick={onClose}>
+              <Button ref={cancelRef} onClick={() => setIsOpen(false)}>
                 Cancel
               </Button>
               <Button colorScheme="yellow" onClick={onRename} ml={3}>

@@ -28,15 +28,7 @@ export default function DeleteFlagPrompt(props) {
     );
   }, [props.projectName, props.flagName]);
 
-  function onClose() {
-    setIsOpen(false);
-  }
-
-  function onOpen() {
-    setIsOpen(true);
-  }
-
-  function onDelete() {
+  const onDelete = () => {
     onClose();
 
     axios.delete(`/api/v1/projects/${flag.ProjectID}/flags/${flag.FlagID}`);
@@ -47,18 +39,18 @@ export default function DeleteFlagPrompt(props) {
       isClosable: true,
     });
     window.location.reload();
-  }
+  };
 
   return (
     <>
-      <Button colorScheme="red" onClick={onOpen}>
+      <Button colorScheme="red" onClick={() => setIsOpen(true)}>
         Delete {flag.FlagName}
       </Button>
 
       <AlertDialog
         isOpen={isOpen}
         leastDestructiveRef={cancelRef}
-        onClose={onClose}
+        onClose={() => setIsOpen(false)}
       >
         <AlertDialogOverlay>
           <AlertDialogContent>
@@ -70,7 +62,7 @@ export default function DeleteFlagPrompt(props) {
             </AlertDialogBody>
 
             <AlertDialogFooter>
-              <Button ref={cancelRef} onClick={onClose}>
+              <Button ref={cancelRef} onClick={() => setIsOpen(false)}>
                 Cancel
               </Button>
               <Button colorScheme="red" onClick={onDelete} ml={3}>
