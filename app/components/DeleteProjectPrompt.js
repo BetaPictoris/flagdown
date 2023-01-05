@@ -14,6 +14,10 @@ import {
   Spinner,
 } from "@chakra-ui/react";
 
+/* 
+  Creates a button that, when clicked, will open a dialog box that
+  asks the user to confirm that they want to delete a project.
+*/
 export default function DeleteProjectPrompt(props) {
   const [project, setProject] = React.useState({});
   const [isOpen, setIsOpen] = React.useState(false);
@@ -23,6 +27,7 @@ export default function DeleteProjectPrompt(props) {
   const [projectName, setProjectName] = React.useState("");
   const handleProjectNameChange = (event) => setProjectName(event.target.value);
 
+  // Get the project data from the server.
   React.useEffect(() => {
     axios(`/api/v1/projects/${props.projectID}`).then((response) => {
       if (response.data) {
@@ -31,6 +36,7 @@ export default function DeleteProjectPrompt(props) {
     });
   }, [props.projectID]);
 
+  // Delete the project and close the dialog box.
   const onDelete = () => {
     setIsOpen(false);
 

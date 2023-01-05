@@ -12,12 +12,17 @@ import {
   useToast,
 } from "@chakra-ui/react";
 
+/*
+  Creates a button that, when clicked, will open a dialog box that
+  asks the user to confirm that they want to delete a flag.
+*/
 export default function DeleteFlagPrompt(props) {
   const [flag, setFlag] = React.useState({});
   const [isOpen, setIsOpen] = React.useState(false);
   const cancelRef = React.useRef();
   const toast = useToast();
 
+  // Get the flag data from the server.
   React.useEffect(() => {
     axios(`/api/v1/projects/${props.projectName}/flags/${props.flagName}`).then(
       (response) => {
@@ -28,6 +33,7 @@ export default function DeleteFlagPrompt(props) {
     );
   }, [props.projectName, props.flagName]);
 
+  // Delete the flag and close the dialog box.
   const onDelete = () => {
     onClose();
 
